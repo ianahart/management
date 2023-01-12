@@ -1,0 +1,16 @@
+img {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+  a {
+    text-decoration: none;
+    background-color: var(--color-secondary);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+}

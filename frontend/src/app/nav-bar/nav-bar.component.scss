@@ -1,0 +1,11 @@
+nav {
+  background-color: var(--color-primary);
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+
+  a {
+    text-decoration: none;
+    color: var(--color-text);
+  }
+}
