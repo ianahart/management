@@ -1,0 +1,129 @@
+.form {
+  border: 1px solid;
+  border-color: #ccc;
+  width: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+  margin-top: 5rem;
+  min-height: 600px;
+  border-radius: 8px;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  h1 {
+    color: var(--color-text);
+  }
+}
+
+.error {
+  font-size: 0.85rem;
+  color: red;
+}
+
+.field {
+  position: relative;
+  margin: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  label {
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+    color: var(--color-text);
+  }
+  input {
+    border: none;
+    border: 1px solid;
+    border-radius: 8px;
+    height: 35px;
+    border-color: #ccc;
+  }
+}
+
+.visibility-toggle-container {
+  position: absolute;
+  top: 30px;
+  right: 5px;
+
+  fa-icon {
+    color: var(--color-text);
+  }
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+
+  button {
+    cursor: pointer;
+    width: 80%;
+    height: 35px;
+    border: none;
+
+    position: relative;
+    display: block;
+    color: #fff;
+    border-radius: 26px;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    background-color: #0e0e30;
+    background-clip: padding-box;
+    overflow: hidden;
+    z-index: 1;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      border: 2px solid transparent;
+      background-image: linear-gradient(#0e0e30, #0e0e30),
+        linear-gradient(90deg, #008cff, #6942ef);
+      background-clip: padding-box, border-box;
+      background-repeat: repeat-x;
+      background-size: calc(100% + 2px * 2) calc(100% + 2px * 2);
+      background-position: center;
+      border-radius: 26px;
+      z-index: -1;
+      transition: border-color 0.2s;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 70vmax;
+      height: 70vmax;
+      border-radius: 50%;
+      background-image: linear-gradient(90deg, var(--color-secondary), #6942ef);
+      transform-origin: center;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.4s ease-in-out;
+      z-index: -1;
+    }
+
+    &:hover {
+      color: #fff;
+      &::after {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    &:active {
+      color: #c3c4d5;
+    }
+
+    &:focus {
+      color: white;
+      &::before {
+        border-color: #00b8d9;
+      }
+    }
+  }
+}
