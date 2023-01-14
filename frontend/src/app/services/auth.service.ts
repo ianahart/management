@@ -1,13 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { pluck } from 'rxjs';
-import { ICreateAccountForm } from '../interfaces';
+import { FormGroup } from '@angular/forms';
+import { BehaviorSubject, pluck, tap } from 'rxjs';
+import { userState } from '../data';
+import {
+  ICreateAccountForm,
+  ILoginForm,
+  ILoginResponse,
+  ITokens,
+  IUser,
+} from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private baseURL = 'http://localhost:4200/api/v1';
+  private user: IUser = userState;
+  private $loggedIn = new BehaviorSubject<boolean | null>(null);
+
   constructor(private http: HttpClient) {}
 
   createAccountFixKeys(form: ICreateAccountForm) {
@@ -34,5 +45,23 @@ export class AuthService {
     return this.http
       .post<string>(`${this.baseURL}/auth/create-account/`, createAccountForm)
       .pipe(pluck('message'));
+  }
+
+  storeTokens(tokens: ITokens) {
+    localStorage.setItem('tokens', JSON.stringify(tokens));
+  }
+
+  removeTokens() {
+    localStorage.removeItem('tokens');
+  }
+
+  setUser(user: IUser) {
+    this.user = user;
+  }
+
+  login(form: FormGroup<ILoginForm>) {
+    return this.http
+      .post<ILoginResponse>(`${this.baseURL}/auth/login/`, form.value)
+      .pipe(tap(() => this.$loggedIn.next(true)));
   }
 }

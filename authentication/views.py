@@ -8,8 +8,9 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from account.models import CustomUser
 import logging
+from account.serializers import CustomUserSerializer
 
-from authentication.serializers import CreateAccountSerializer
+from authentication.serializers import CreateAccountSerializer, LoginSerializer
 
 
 logger = logging.getLogger('django')
@@ -38,8 +39,37 @@ class RegisterAPIView(APIView):
             )
             return Response({
                 'message': 'success'
-            }, status=status.HTTP_200_OK)
+            }, status=status.HTTP_201_CREATED)
         except ValidationError as e:
             return Response({
                 'errors': e.detail
             }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TokenObtainPairView(APIView):
+
+    permission_classes = [AllowAny, ]
+
+    def post(self, request):
+        try:
+
+            login_serializer = LoginSerializer(data=request.data)
+            login_serializer.is_valid(raise_exception=True)
+            email, password = login_serializer.validated_data.values()
+
+            data = CustomUser.objects.login(email, password)
+            user_serializer = CustomUserSerializer(data['user'])
+            if data:
+                return Response({
+                    'message': 'success',
+                    'tokens': data['tokens'],
+                    'user': user_serializer.data,
+                }, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            status_code = status.HTTP_400_BAD_REQUEST
+            if str(e) == 'User does not exist.':
+                status_code = status.HTTP_404_NOT_FOUND
+            return Response({
+                'message': str(e)
+            }, status=status_code)
