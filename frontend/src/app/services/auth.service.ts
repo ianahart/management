@@ -7,6 +7,7 @@ import {
   ICreateAccountForm,
   ILoginForm,
   ILoginResponse,
+  IRefreshUserResponse,
   ITokens,
   IUser,
 } from '../interfaces';
@@ -17,7 +18,7 @@ import {
 export class AuthService {
   private baseURL = 'http://localhost:4200/api/v1';
   private user: IUser = userState;
-  private $loggedIn = new BehaviorSubject<boolean | null>(null);
+  public loggedIn$ = new BehaviorSubject<boolean | null>(null);
 
   constructor(private http: HttpClient) {}
 
@@ -59,9 +60,32 @@ export class AuthService {
     this.user = user;
   }
 
+  getTokens() {
+    if (localStorage.getItem('tokens')) {
+      return JSON.parse(localStorage.getItem('tokens') || '');
+    }
+  }
+
+  syncUser() {
+    const tokens = this.getTokens();
+    return this.http
+      .get<IRefreshUserResponse>(`${this.baseURL}/account/refresh/`, {
+        headers: { Authorization: `Bearer ${tokens?.access_token}` },
+      })
+      .pipe(
+        tap(() => {
+          if (tokens) {
+            this.loggedIn$.next(true);
+          } else {
+            this.loggedIn$.next(false);
+          }
+        })
+      );
+  }
+
   login(form: FormGroup<ILoginForm>) {
     return this.http
       .post<ILoginResponse>(`${this.baseURL}/auth/login/`, form.value)
-      .pipe(tap(() => this.$loggedIn.next(true)));
+      .pipe(tap(() => this.loggedIn$.next(true)));
   }
 }

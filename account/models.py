@@ -21,6 +21,17 @@ logger = logging.getLogger('django')
 
 class CustomUserManager(BaseUserManager):
 
+    def refresh_user(self, user: 'CustomUser', authorization: str):
+        access_token = authorization.split('Bearer ')[1]
+
+        decoded_token = TokenBackend(
+            algorithm='HS256',
+        ).decode(access_token, verify=False)
+
+        if decoded_token and decoded_token is not None:
+            obj = CustomUser.objects.get(pk=decoded_token['user_id'])
+            return None if obj.pk != user.pk else obj
+
     def create(self, email: str, password: str, **extra_fields) -> None:
         """
         Create and save a User with the given email and password.

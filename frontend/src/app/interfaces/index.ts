@@ -1,5 +1,9 @@
 import { FormControl } from '@angular/forms';
 
+export interface IRefreshUserResponse {
+  user: IUser;
+}
+
 export interface ICreateAccountForm {
   [index: string]: string;
   firstName: string;
