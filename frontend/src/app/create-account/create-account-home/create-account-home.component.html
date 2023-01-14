@@ -2,6 +2,9 @@
   <header>
     <h1>Create Account</h1>
   </header>
+  <div class="errors">
+    <p *ngFor="let error of errors">{{ error }}</p>
+  </div>
   <div class="field">
     <label>First Name</label>
     <input type="text" formControlName="firstName" />
@@ -10,7 +13,7 @@
         First name is required.
       </div>
       <div class="error" *ngIf="firstName?.errors?.['maxlength']">
-        First name cannot exceed 75 characters.
+        First name cannot exceed 200 characters.
       </div>
     </div>
   </div>
@@ -23,7 +26,7 @@
         Last name is required.
       </div>
       <div class="error" *ngIf="lastName?.errors?.['maxlength']">
-        Last name cannot exceed 75 characters.
+        Last name cannot exceed 200 characters.
       </div>
     </div>
   </div>

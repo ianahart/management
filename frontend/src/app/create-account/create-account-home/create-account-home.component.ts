@@ -1,23 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MatchPassword } from 'src/app/validators/match-password';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-create-account-home',
   templateUrl: './create-account-home.component.html',
   styleUrls: ['./create-account-home.component.scss'],
 })
 export class CreateAccountHomeComponent implements OnInit {
-  constructor(private fb: FormBuilder, private matchPassword: MatchPassword) {}
   faEye = faEye;
   faEyeSlash = faEyeSlash;
   passwordType = 'password';
+  errors: string[] = [];
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private matchPassword: MatchPassword,
+    private authService: AuthService
+  ) {}
   ngOnInit(): void {}
 
   createAccountForm = this.fb.group(
     {
-      firstName: ['', [Validators.required, Validators.maxLength(75)]],
-      lastName: ['', [Validators.required, Validators.maxLength(75)]],
+      firstName: ['', [(Validators.required, Validators.maxLength(200))]],
+      lastName: ['', [(Validators.required, Validators.maxLength(200))]],
       email: ['', [Validators.required, Validators.email]],
       password: [
         '',
@@ -37,9 +46,23 @@ export class CreateAccountHomeComponent implements OnInit {
   );
 
   onSubmit(): void {
-    console.log('Form submitted.');
-    console.log(this.createAccountForm.invalid);
-    console.log(this.createAccountForm.value);
+    this.errors = [];
+    if (this.createAccountForm.invalid) {
+      return;
+    }
+
+    this.authService.createAccount(this.createAccountForm.value).subscribe(
+      (value) => {
+        if (value === 'success') {
+          this.router.navigate(['/']);
+        }
+      },
+      ({ error }) => {
+        for (const [_, val] of Object.entries(error.errors)) {
+          this.errors.push(val as string);
+        }
+      }
+    );
   }
 
   toggleVisibility(type: string): void {
