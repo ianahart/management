@@ -1,0 +1,79 @@
+.container {
+  min-height: 100vh;
+  background-image: url("../../../assets/login.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 3rem;
+}
+
+.form {
+  border: 1px solid;
+  border-color: #ccc;
+  width: 400px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 1rem;
+  margin-top: 5rem;
+  min-height: 500px;
+  border-radius: 8px;
+}
+
+header {
+  margin-bottom: 5rem;
+  text-align: center;
+  h1 {
+    color: var(--color-text);
+  }
+}
+
+.server-error {
+  text-align: center;
+  p {
+    color: red;
+    font-size: 0.85rem;
+  }
+}
+
+.field {
+  position: relative;
+  margin: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  label {
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+    color: var(--color-text);
+  }
+  input {
+    border: none;
+    border: 1px solid;
+    border-radius: 8px;
+    height: 35px;
+    border-color: #ccc;
+  }
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0 1rem 0;
+  button {
+    background-color: var(--color-secondary);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.5s ease-in;
+    width: 80%;
+    height: 35px;
+    color: #fff;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.error {
+  color: red;
+  font-size: 0.85rem;
+}

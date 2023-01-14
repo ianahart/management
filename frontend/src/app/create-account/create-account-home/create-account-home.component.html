@@ -1,92 +1,99 @@
-<form class="form" [formGroup]="createAccountForm" (ngSubmit)="onSubmit()">
-  <header>
-    <h1>Create Account</h1>
-  </header>
-  <div class="errors">
-    <p *ngFor="let error of errors">{{ error }}</p>
-  </div>
-  <div class="field">
-    <label>First Name</label>
-    <input type="text" formControlName="firstName" />
-    <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)">
-      <div class="error" *ngIf="firstName?.errors?.['required']">
-        First name is required.
-      </div>
-      <div class="error" *ngIf="firstName?.errors?.['maxlength']">
-        First name cannot exceed 200 characters.
-      </div>
+<div class="container">
+  <form class="form" [formGroup]="createAccountForm" (ngSubmit)="onSubmit()">
+    <header>
+      <h1>Create Account</h1>
+    </header>
+    <div class="errors">
+      <p *ngFor="let error of errors">{{ error }}</p>
     </div>
-  </div>
-
-  <div class="field">
-    <label>Last Name</label>
-    <input type="text" formControlName="lastName" />
-    <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">
-      <div class="error" *ngIf="lastName?.errors?.['required']">
-        Last name is required.
-      </div>
-      <div class="error" *ngIf="lastName?.errors?.['maxlength']">
-        Last name cannot exceed 200 characters.
-      </div>
-    </div>
-  </div>
-
-  <div class="field">
-    <label>Email</label>
-    <input type="email" formControlName="email" />
-    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-      <div class="error" *ngIf="email?.errors?.['required']">
-        Email is required.
-      </div>
-      <div class="error" *ngIf="email?.errors?.['email']">
-        Please provide a valid email address.
-      </div>
-    </div>
-  </div>
-
-  <div class="field">
-    <label>Password</label>
-    <input [type]="passwordType" formControlName="password" />
-    <div *ngIf="password?.value.length > 0" class="visibility-toggle-container">
+    <div class="field">
+      <label>First Name</label>
+      <input type="text" formControlName="firstName" />
       <div
-        (click)="toggleVisibility('text')"
-        *ngIf="passwordType === 'password'"
+        *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)"
       >
-        <fa-icon [icon]="faEye"></fa-icon>
-      </div>
-      <div
-        (click)="toggleVisibility('password')"
-        *ngIf="passwordType === 'text'"
-      >
-        <fa-icon [icon]="faEyeSlash"></fa-icon>
+        <div class="error" *ngIf="firstName?.errors?.['required']">
+          First name is required.
+        </div>
+        <div class="error" *ngIf="firstName?.errors?.['maxlength']">
+          First name cannot exceed 200 characters.
+        </div>
       </div>
     </div>
-    <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
-      <div class="error" *ngIf="password?.errors?.['required']">
-        Password is required.
-      </div>
-      <div class="error" *ngIf="password?.errors?.['pattern']">
-        Password must include 1 uppercase, 1 digit, and 1 special character.
-      </div>
-    </div>
-  </div>
 
-  <div class="field">
-    <label>Confirm Password</label>
-    <input [type]="passwordType" formControlName="confirmPassword" />
-    <div *ngIf="confirmPassword?.dirty || confirmPassword?.touched">
-      <div class="error" *ngIf="confirmPassword?.errors?.['required']">
-        Confirm password is required.
-      </div>
-      <div
-        class="error"
-        *ngIf="createAccountForm?.errors?.['passwordDontMatch']"
-      >
-        Passwords do not match.
+    <div class="field">
+      <label>Last Name</label>
+      <input type="text" formControlName="lastName" />
+      <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">
+        <div class="error" *ngIf="lastName?.errors?.['required']">
+          Last name is required.
+        </div>
+        <div class="error" *ngIf="lastName?.errors?.['maxlength']">
+          Last name cannot exceed 200 characters.
+        </div>
       </div>
     </div>
-  </div>
-  <div class="btn-container">
-    <button type="submit">Create</button>
-  </div>
-</form>
+
+    <div class="field">
+      <label>Email</label>
+      <input type="email" formControlName="email" />
+      <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+        <div class="error" *ngIf="email?.errors?.['required']">
+          Email is required.
+        </div>
+        <div class="error" *ngIf="email?.errors?.['email']">
+          Please provide a valid email address.
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <input [type]="passwordType" formControlName="password" />
+      <div
+        *ngIf="password?.value.length > 0"
+        class="visibility-toggle-container"
+      >
+        <div
+          (click)="toggleVisibility('text')"
+          *ngIf="passwordType === 'password'"
+        >
+          <fa-icon [icon]="faEye"></fa-icon>
+        </div>
+        <div
+          (click)="toggleVisibility('password')"
+          *ngIf="passwordType === 'text'"
+        >
+          <fa-icon [icon]="faEyeSlash"></fa-icon>
+        </div>
+      </div>
+      <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+        <div class="error" *ngIf="password?.errors?.['required']">
+          Password is required.
+        </div>
+        <div class="error" *ngIf="password?.errors?.['pattern']">
+          Password must include 1 uppercase, 1 digit, and 1 special character.
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Confirm Password</label>
+      <input [type]="passwordType" formControlName="confirmPassword" />
+      <div *ngIf="confirmPassword?.dirty || confirmPassword?.touched">
+        <div class="error" *ngIf="confirmPassword?.errors?.['required']">
+          Confirm password is required.
+        </div>
+        <div
+          class="error"
+          *ngIf="createAccountForm?.errors?.['passwordDontMatch']"
+        >
+          Passwords do not match.
+        </div>
+      </div>
+    </div>
+    <div class="btn-container">
+      <button type="submit">Create</button>
+    </div>
+  </form>
+</div>

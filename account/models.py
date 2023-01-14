@@ -3,6 +3,7 @@ from typing import Dict, Union
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import BaseUserManager, AbstractUser, PermissionsMixin
+from rest_framework.exceptions import AuthenticationFailed, ValidationError
 from rest_framework_simplejwt.backends import TokenBackend
 from django.db import models, DatabaseError
 from django.contrib.auth import hashers
@@ -48,6 +49,25 @@ class CustomUserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError(_('Superuser must have is_superuser=True.'))
         return self.create(email, password, **extra_fields)
+
+    def login(self, email: str, password: str):
+        user = CustomUser.objects.all().filter(email=email).first()
+        if user is None:
+            raise CustomUser.DoesNotExist('User does not exist.')
+
+        if not hashers.check_password(password, user.password):
+            raise AuthenticationFailed('Invalid credentials.')
+
+        refresh_token = RefreshToken.for_user(user)
+        access_token = refresh_token.access_token
+        access_token.set_exp(lifetime=timedelta(days=3))
+
+        tokens = {
+            'access_token': str(access_token),
+            'refresh_token': str(refresh_token),
+        }
+
+        return {'tokens': tokens, 'user': user}
 
 
 class CustomUser(AbstractUser, PermissionsMixin):
