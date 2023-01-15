@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthService } from './services/auth.service';
+import { AuthHttpInterceptor } from './auth-http.interceptor';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,10 @@ import { AuthService } from './services/auth.service';
     NotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-  providers: [AuthService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
+    AuthService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

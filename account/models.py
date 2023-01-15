@@ -61,6 +61,15 @@ class CustomUserManager(BaseUserManager):
             raise ValueError(_('Superuser must have is_superuser=True.'))
         return self.create(email, password, **extra_fields)
 
+    def logout(self, user: 'CustomUser', refresh_token: str):
+
+        exp_token = RefreshToken(refresh_token)
+        exp_token.blacklist()
+
+        user_to_logout = CustomUser.objects.get(pk=user.id)
+        user_to_logout.logged_in = False
+        user_to_logout.save()
+
     def login(self, email: str, password: str):
         user = CustomUser.objects.all().filter(email=email).first()
         if user is None:
@@ -77,6 +86,10 @@ class CustomUserManager(BaseUserManager):
             'access_token': str(access_token),
             'refresh_token': str(refresh_token),
         }
+
+        user.logged_in = True
+        user.save()
+        user.refresh_from_db()
 
         return {'tokens': tokens, 'user': user}
 

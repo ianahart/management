@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { BehaviorSubject, pluck, tap } from 'rxjs';
+import { BehaviorSubject, catchError, of, pluck, tap } from 'rxjs';
 import { userState } from '../data';
 import {
   ICreateAccountForm,
@@ -80,6 +80,36 @@ export class AuthService {
             this.loggedIn$.next(false);
           }
         })
+      );
+  }
+
+  refreshToken() {
+    const tokens = this.getTokens();
+    return this.http
+      .post<any>(`${this.baseURL}/auth/refresh/`, {
+        refresh: tokens.refresh_token,
+      })
+      .pipe(
+        tap((token) => {
+          tokens.access_token = token.access;
+          this.storeTokens(tokens);
+        }),
+        catchError((error) => {
+          this.logout();
+          return of(false);
+        })
+      );
+  }
+
+  logout() {
+    const tokens = this.getTokens();
+    return this.http
+      .post<string>(`${this.baseURL}/auth/logout/`, {
+        refresh_token: tokens.refresh_token,
+      })
+      .pipe(
+        tap(() => this.loggedIn$.next(false)),
+        pluck('message')
       );
   }
 

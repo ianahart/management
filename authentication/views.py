@@ -10,10 +10,32 @@ from account.models import CustomUser
 import logging
 from account.serializers import CustomUserSerializer
 
-from authentication.serializers import CreateAccountSerializer, LoginSerializer
+from authentication.serializers import CreateAccountSerializer, LoginSerializer, LogoutSerializer
 
 
 logger = logging.getLogger('django')
+
+
+class LogoutAPIView(APIView):
+
+    permission_classes = [IsAuthenticated, ]
+
+    def post(self, request):
+        try:
+            serializer = LogoutSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+
+            CustomUser.objects.logout(
+                request.user,
+                serializer.validated_data['refresh_token']
+            )
+            return Response({
+                'message': 'success'
+            }, status=status.HTTP_200_OK)
+        except:
+            return Response({
+                'message': 'error',
+            }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class RegisterAPIView(APIView):

@@ -36,6 +36,7 @@ class CustomUserAdmin(BaseUserAdmin):
                     'user_permissions',
                     'role',
                     'password',
+                    'logged_in',
                 )
 
 
