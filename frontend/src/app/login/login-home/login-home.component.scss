@@ -77,3 +77,9 @@ header {
   color: red;
   font-size: 0.85rem;
 }
+
+@media (max-width: 600px) {
+  .form {
+    width: 95%;
+  }
+}

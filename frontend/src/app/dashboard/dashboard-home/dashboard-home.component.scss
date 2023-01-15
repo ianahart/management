@@ -1,0 +1,27 @@
+.container {
+  min-height: 100vh;
+  margin-top: 1rem;
+  display: flex;
+  background: #f4f4f4;
+}
+
+.outlet {
+  flex: 2;
+  min-height: 100vh;
+  background: #f4f4f4;
+}
+
+.outlet-container {
+  min-height: 100vh;
+  margin: 1rem;
+  background: #fff;
+  padding: 0.5rem;
+  margin-top: 5rem;
+  box-shadow: var(--box-shadow);
+}
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+}
