@@ -10,7 +10,6 @@ class PasswordResetManager(models.Manager):
         pass
 
     def create_password_reset(self, data: Dict[str, Union[str, int]], user: "CustomUser"):
-        print(data)
         prev_resets = PasswordReset.objects.all().filter(user_id=data['uid'])
 
         for prev_reset in prev_resets:
