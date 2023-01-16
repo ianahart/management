@@ -18,6 +18,11 @@ export interface ILoginForm {
   password: FormControl<string | null>;
 }
 
+export interface IResetPasswordForm {
+  password: FormControl<string | null>;
+  confirm_password: FormControl<string | null>;
+}
+
 export interface ITokens {
   access_token: string;
   refresh_token: string;

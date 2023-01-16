@@ -11,10 +11,36 @@ import logging
 from account.serializers import CustomUserSerializer
 from authentication.models import PasswordReset
 
-from authentication.serializers import CreateAccountSerializer, ForgotPasswordSerializer, LoginSerializer, LogoutSerializer
+from authentication.serializers import CreateAccountSerializer, ForgotPasswordSerializer, LoginSerializer, LogoutSerializer, PasswordResetSerializer
 
 
 logger = logging.getLogger('django')
+
+
+class PasswordResetAPIView(APIView):
+    permission_classes = [AllowAny, ]
+
+    def post(self, request, pk: int):
+        try:
+
+            serializer = PasswordResetSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+
+            CustomUser.objects.reset_password(
+                serializer.validated_data['password'],
+                serializer.validated_data['token'],
+                pk
+            )
+
+            return Response({
+                'message': 'success'
+            }, status=status.HTTP_200_OK)
+        except (BadRequest) as e:
+
+            print(e)
+            return Response({
+                'error': [str(e)],
+            }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ForgotPasswordAPIView(APIView):

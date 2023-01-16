@@ -24,6 +24,17 @@ const routes: Routes = [
   },
 
   {
+    path: 'reset-password',
+    canActivate: [GuestGuard],
+    loadChildren: async () => {
+      const dynamicImport = await import(
+        './reset-password/reset-password.module'
+      );
+      return dynamicImport.ResetPasswordModule;
+    },
+  },
+
+  {
     path: 'forgot-password',
     canActivate: [GuestGuard],
     loadChildren: async () => {

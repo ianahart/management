@@ -8,6 +8,7 @@ import {
   ILoginForm,
   ILoginResponse,
   IRefreshUserResponse,
+  IResetPasswordForm,
   ITokens,
   IUser,
 } from '../interfaces';
@@ -121,5 +122,19 @@ export class AuthService {
 
   forgotPassword(email: string) {
     return this.http.post(`${this.baseURL}/auth/forgot-password/`, { email });
+  }
+
+  resetPassword(
+    form: FormGroup<IResetPasswordForm>,
+    token: string,
+    userId: number
+  ) {
+    return this.http
+      .post<string>(`${this.baseURL}/auth/reset-password/${userId}/`, {
+        password: form.value.password,
+        confirm_password: form.value.confirm_password,
+        token,
+      })
+      .pipe(pluck('message'));
   }
 }

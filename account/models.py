@@ -1,11 +1,13 @@
 from datetime import datetime, timedelta, date
 from typing import Dict, Union
+from django.core.exceptions import BadRequest
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import BaseUserManager, AbstractUser, PermissionsMixin
 from rest_framework.exceptions import AuthenticationFailed, ValidationError
 from rest_framework_simplejwt.backends import TokenBackend
-from django.db import models, DatabaseError
+from django.db import models
+from django.utils import timezone
 from django.contrib.auth import hashers
 from django.template.loader import render_to_string
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -21,8 +23,36 @@ logger = logging.getLogger('django')
 
 class CustomUserManager(BaseUserManager):
 
+    def reset_password(self, password: str, token: str, pk: int):
+        user = None
+        try:
+            user = CustomUser.objects.get(pk=pk)
+
+            if user is None:
+                raise CustomUser.DoesNotExist('Could not find user.')
+
+        except CustomUser.DoesNotExist as e:
+            raise BadRequest('User does not exist.')
+
+        token = TokenBackend(algorithm='HS256').decode(token, verify=False)
+
+        password_reset = user.password_reset.all().filter(
+            user_id=token['user_id']).first()
+
+        elapsed = datetime.now(timezone.utc) - password_reset.created_at
+
+        if (elapsed > timedelta(days=1)):
+            raise BadRequest('Password reset token has expired.')
+
+        if hashers.check_password(password, user.password):
+            raise BadRequest(
+                'Password cannot be the same as your old password')
+
+        user.password = hashers.make_password(password)
+        user.save()
+        password_reset.delete()
+
     def forgot_password(self, email: str):
-        print(email)
         user = CustomUser.objects.all().filter(email=email).first()
 
         if user is None:
@@ -147,6 +177,6 @@ class CustomUser(AbstractUser, PermissionsMixin):
     def __str__(self):
         return f"{self.email}"
 
-    @property
+    @ property
     def full_name(self):
         return f'{self.first_name} {self.last_name}'

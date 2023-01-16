@@ -2,11 +2,42 @@ from rest_framework import serializers
 from account.models import CustomUser
 
 
+class PasswordResetSerializer(serializers.ModelSerializer):
+    token = serializers.CharField()
+    confirm_password = serializers.CharField()
+
+    class Meta:
+        model = CustomUser
+        fields = ('token', 'password', 'confirm_password', )
+
+    def validate_password(self, value: str):
+        special_chars, digit, u_case = False, False, False
+
+        for ch in value:
+            print(ch)
+            if ch.isnumeric():
+                digit = True
+            if not ch.isalnum():
+                special_chars = True
+            if not ch.isnumeric() and ch.isalnum() and ch == ch.upper():
+                u_case = True
+
+        if not all([special_chars, digit, u_case]):
+            raise serializers.ValidationError(
+                'Please include 1 uppercase, 1 digit, and 1 special char.')
+
+        data = self.get_initial()
+        if data['password'] != data['confirm_password']:
+            raise serializers.ValidationError('Passwords do not match.')
+        return value
+
+
 class ForgotPasswordSerializer(serializers.Serializer):
     email = serializers.CharField()
 
     class Meta:
         fields = ('email', )
+
 
 class LogoutSerializer(serializers.Serializer):
     refresh_token = serializers.CharField()
