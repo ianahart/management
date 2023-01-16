@@ -24,6 +24,17 @@ const routes: Routes = [
   },
 
   {
+    path: 'forgot-password',
+    canActivate: [GuestGuard],
+    loadChildren: async () => {
+      const dynamicImport = await import(
+        './forgot-password/forgot-password.module'
+      );
+      return dynamicImport.ForgotPasswordModule;
+    },
+  },
+
+  {
     path: 'create-account',
     canActivate: [GuestGuard],
     loadChildren: async () => {
