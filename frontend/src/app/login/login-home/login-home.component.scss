@@ -78,6 +78,20 @@ header {
   font-size: 0.85rem;
 }
 
+.forgot-password {
+  display: flex;
+  justify-content: flex-end;
+  a {
+    text-decoration: none;
+    color: var(--color-secondary);
+    font-size: 0.85rem;
+    transition: all 0.25s ease-in;
+    &:hover {
+     opacity: 0.75;
+    }
+  }
+}
+
 @media (max-width: 600px) {
   .form {
     width: 95%;

@@ -9,11 +9,36 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from account.models import CustomUser
 import logging
 from account.serializers import CustomUserSerializer
+from authentication.models import PasswordReset
 
-from authentication.serializers import CreateAccountSerializer, LoginSerializer, LogoutSerializer
+from authentication.serializers import CreateAccountSerializer, ForgotPasswordSerializer, LoginSerializer, LogoutSerializer
 
 
 logger = logging.getLogger('django')
+
+
+class ForgotPasswordAPIView(APIView):
+    permission_classes = [AllowAny, ]
+
+    def post(self, request):
+        try:
+            serializer = ForgotPasswordSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+
+            data = CustomUser.objects.forgot_password(
+                serializer.validated_data['email'])
+
+            user = CustomUser.objects.get(pk=data['data']['uid'])
+
+            PasswordReset.objects.create_password_reset(data['data'], user)
+            return Response({
+                'message': 'success'
+            }, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({
+                'message': str(e),
+            }, status=status.HTTP_404_NOT_FOUND)
 
 
 class LogoutAPIView(APIView):

@@ -118,4 +118,8 @@ export class AuthService {
       .post<ILoginResponse>(`${this.baseURL}/auth/login/`, form.value)
       .pipe(tap(() => this.loggedIn$.next(true)));
   }
+
+  forgotPassword(email: string) {
+    return this.http.post(`${this.baseURL}/auth/forgot-password/`, { email });
+  }
 }
