@@ -1,12 +1,9 @@
-from rest_framework.exceptions import NotFound, ParseError, ValidationError
-from django.core.exceptions import BadRequest, ObjectDoesNotExist
-from rest_framework.decorators import permission_classes
+from rest_framework.exceptions import NotFound
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from department.models import Department
-import json
 import logging
 
 from department.serializers import CreateDepartmentSerializer, DepartmentSerializer, UpdateDepartmentSerializer
