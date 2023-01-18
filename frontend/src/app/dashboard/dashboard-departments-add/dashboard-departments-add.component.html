@@ -1,0 +1,27 @@
+<div class="container">
+  <form [formGroup]="addDepartmentForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="inner-form">
+      <header>
+        <h1>Add a Dept</h1>
+      </header>
+      <div class="error" *ngIf="error">
+        {{ error }}
+      </div>
+      <div class="field">
+        <label>Name of Dept</label>
+        <input [formControlName]="'name'" type="text" />
+      </div>
+      <div *ngIf="name?.touched || name?.dirty">
+        <div class="error" *ngIf="name?.errors?.['required']">
+          A department name is required
+        </div>
+        <div class="error" *ngIf="name?.errors?.['maxlength']">
+          A department name cannot exceed 200 characters.
+        </div>
+      </div>
+      <div class="btn-container">
+        <button class="form-btn" type="submit">Add</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,41 @@
+.container {
+  min-height: 100vh;
+  background-image: url("../../../assets/forms.png");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin: 7rem 0;
+  button {
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    height: 35px;
+    width: 100px;
+    cursor: pointer;
+    margin: 0 1.5rem;
+    transition: all 0.25s ease-in;
+    &:hover {
+      opacity: 0.75;
+    }
+    &:first-of-type {
+      background: var(--color-secondary);
+    }
+    &:last-of-type {
+      background-color: var(--color-text);
+    }
+  }
+}
+
+.error {
+  font-size: 0.85rem;
+  text-align: center;
+  color: red;
+}

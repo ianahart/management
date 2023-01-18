@@ -1,1 +1,27 @@
-<p>dashboard-departments works!</p>
+<header>
+  <h1>All Departments</h1>
+</header>
+<div class="container">
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Action</th>
+    </tr>
+    <tr *ngFor="let column of departments">
+      <td>{{ column.id }}</td>
+      <td>{{ column.name }}</td>
+      <td class="modify-btn-container">
+        <a routerLink="{{ column.id }}" class="form-btn modify-btn">Modify</a>
+      </td>
+    </tr>
+  </table>
+  <div class="pagination">
+    <button *ngIf="page !== 1" (click)="onPrev()">Prev</button>
+    <p>{{ page }} of {{ totalPages }}</p>
+    <button *ngIf="page !== totalPages" (click)="onNext()">Next</button>
+  </div>
+  <div class="actions btn-container">
+    <a routerLink="add">Add</a>
+  </div>
+</div>

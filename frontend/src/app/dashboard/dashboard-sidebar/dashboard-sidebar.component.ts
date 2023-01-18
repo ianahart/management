@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {
   faChalkboard,
   faRightFromBracket,
+  faBuildingColumns,
 } from '@fortawesome/free-solid-svg-icons';
 import { userState } from 'src/app/data';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,6 +16,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class DashboardSidebarComponent implements OnInit {
   faRightFromBracket = faRightFromBracket;
   faChalkboard = faChalkboard;
+  faBuildingColumns = faBuildingColumns;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -22,7 +24,6 @@ export class DashboardSidebarComponent implements OnInit {
 
   onLogout(): void {
     this.authService.logout().subscribe((value) => {
-      console.log(value);
       if (value === 'success') {
         this.authService.removeTokens();
         this.authService.setUser(userState);
