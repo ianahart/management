@@ -4,6 +4,23 @@ export interface IRefreshUserResponse {
   user: IUser;
 }
 
+export interface IDepartment {
+  id: number;
+  name: string;
+}
+
+export interface IRetrieveDepartmentResponse {
+  message?: string;
+  department: IDepartment;
+}
+
+export interface IRetrieveDepartmentsResponse {
+  message?: string;
+  page: number;
+  total_pages: number;
+  departments: IDepartment[];
+}
+
 export interface ICreateAccountForm {
   [index: string]: string;
   firstName: string;
@@ -16,6 +33,14 @@ export interface ICreateAccountForm {
 export interface ILoginForm {
   email: FormControl<string | null>;
   password: FormControl<string | null>;
+}
+
+export interface IUpdateDepartmentForm {
+  name: FormControl<string | null>;
+}
+
+export interface IAddDepartmentForm {
+  name: FormControl<string | null>;
 }
 
 export interface IResetPasswordForm {
@@ -33,6 +58,14 @@ export interface IUser {
   last_name: string;
   email: string;
   avatar_url: string;
+}
+
+export interface IUpdateDepartmentResponse {
+  message?: string;
+}
+
+export interface IDeleteDepartmentResponse {
+  message?: string;
 }
 
 export interface ILoginResponse {

@@ -17,3 +17,73 @@ body {
   --color-hover: #ffd700;
   --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+
+.actions {
+  display: flex;
+  justify-content: space-evenly;
+  a {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--color-secondary);
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+    border-radius: 20px;
+    transition: all 0.5s ease-in;
+    cursor: pointer;
+    height: 35px;
+    width: 150px;
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
+
+.form-btn {
+  cursor: pointer;
+  background: var(--color-secondary);
+  border: none;
+  border-radius: 20px;
+  height: 35px;
+  width: 80%;
+  transition: all 0.25s ease-in;
+  color: #fff;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.field {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  label {
+    display: inline-block;
+    width: 80%;
+    margin-bottom: 0.25rem;
+    color: var(--color-text);
+  }
+
+  input {
+    width: 80%;
+    border: 1px solid #ccc;
+    height: 35px;
+    border-radius: 8px;
+  }
+}

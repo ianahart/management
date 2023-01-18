@@ -1,0 +1,25 @@
+<div class="container">
+  <app-dashboard-form
+    (submitEvent)="updateDepartment($event)"
+    [title]="'Modify Dept'"
+    [formGroup]="modifyForm"
+  >
+    <div class="field">
+      <label>Name of Dept</label>
+      <input [formControlName]="'name'" type="text" />
+    </div>
+    <div class="error" *ngIf="error">{{ error }}</div>
+    <div *ngIf="name?.touched || name?.dirty">
+      <div class="error" *ngIf="name?.errors?.['required']">
+        A department name is required
+      </div>
+      <div class="error" *ngIf="name?.errors?.['maxlength']">
+        A department name cannot exceed 200 characters.
+      </div>
+    </div>
+    <div class="btn-container">
+      <button>Update</button>
+      <button (click)="deleteDepartment($event)">Delete</button>
+    </div>
+  </app-dashboard-form>
+</div>
