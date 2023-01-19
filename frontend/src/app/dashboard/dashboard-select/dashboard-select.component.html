@@ -1,0 +1,13 @@
+<div class="container">
+  <div id="select" (click)="openSelectDropDown(true)" class="select">
+    <p>{{ selectedItem }}</p>
+    <fa-icon [icon]="faChevronDown"></fa-icon>
+  </div>
+  <div *ngIf="isDropDownOpen" class="select-contents">
+    <div *ngFor="let key of keys">
+      <p (click)="selectItem(item)" *ngFor="let item of items">
+        {{ item[key] }}
+      </p>
+    </div>
+  </div>
+</div>

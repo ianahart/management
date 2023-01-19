@@ -7,6 +7,7 @@ import {
   IRetrieveDepartmentResponse,
   IUpdateDepartmentResponse,
   IDeleteDepartmentResponse,
+  IRetrieveAllDepartmentsResponse,
 } from '../interfaces';
 import { FormGroup } from '@angular/forms';
 import { map, pluck } from 'rxjs';
@@ -32,6 +33,13 @@ export class DashboardDepartmentService {
       }
     );
   }
+
+  retrieveAllDepartments() {
+    return this.http
+      .get<IRetrieveAllDepartmentsResponse>(`${this.baseURL}/departments/all/`)
+      .pipe(map((x) => x.departments));
+  }
+
   retrieveDepartment(id: string) {
     return this.http.get<IRetrieveDepartmentResponse>(
       `${this.baseURL}/departments/${id}/`

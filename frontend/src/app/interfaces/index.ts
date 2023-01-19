@@ -21,6 +21,15 @@ export interface IRetrieveDepartmentsResponse {
   departments: IDepartment[];
 }
 
+export interface ICreateCourseResponse {
+    message?: string;
+}
+
+
+export interface IRetrieveAllDepartmentsResponse {
+  departments: IDepartment[];
+}
+
 export interface ICreateAccountForm {
   [index: string]: string;
   firstName: string;
@@ -41,6 +50,13 @@ export interface IUpdateDepartmentForm {
 
 export interface IAddDepartmentForm {
   name: FormControl<string | null>;
+}
+
+export interface IAddCourseForm {
+  name: FormControl<string | null>;
+  credits: FormControl<string | null>;
+  semester: FormControl<string | null>;
+  department: FormControl<string | null>;
 }
 
 export interface IResetPasswordForm {

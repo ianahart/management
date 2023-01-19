@@ -3,7 +3,8 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from department.models import Department
+from course.serializers import CreateCourseSerializer
+from course.models import Course
 import logging
 
 from department.serializers import CreateDepartmentSerializer, DepartmentSerializer, UpdateDepartmentSerializer
@@ -18,6 +19,10 @@ class ListCreateAPIView(APIView):
 
     def post(self, request):
         try:
+            serializer = CreateCourseSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            Course.objects.create(serializer.validated_data)
+
             return Response({
                 'message': 'success'
             }, status=status.HTTP_201_CREATED)

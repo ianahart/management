@@ -12,6 +12,27 @@ from department.serializers import CreateDepartmentSerializer, DepartmentSeriali
 logger = logging.getLogger('django')
 
 
+class AllDepartmentAPIView(APIView):
+
+    permission_classes = [IsAuthenticated, ]
+
+    def get(self, request):
+        try:
+            departments = Department.objects.retrieve_all()
+
+            serializer = DepartmentSerializer(departments, many=True)
+
+            return Response({
+                'message': 'success',
+                'departments': serializer.data,
+            })
+
+        except Exception as e:
+            return Response({
+                'error': str(e)
+            }, status=status.HTTP_404_NOT_FOUND)
+
+
 class DetailsAPIView(APIView):
     permission_classes = [IsAuthenticated, ]
 
