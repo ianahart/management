@@ -1,0 +1,23 @@
+.container {
+  background-image: url("../../../assets/forms.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error {
+  color: red;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  padding-bottom: 2rem;
+}

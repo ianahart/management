@@ -59,8 +59,33 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    background-color: var(--color-secondary);
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 120px;
+    transition: all 0.25s ease-in;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 }
 
+td {
+  color: var(--color-text);
+}
+
+th {
+  color: var(--color-primary);
+}
 td,
 th {
   border: 1px solid #dddddd;

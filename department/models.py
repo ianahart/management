@@ -6,6 +6,11 @@ from django.utils import timezone
 
 
 class DepartmentManager(models.Manager):
+
+    def retrieve_all(self):
+        departments = Department.objects.all().order_by('name')
+        return departments
+
     def create(self, name: str):
         department = Department.objects.all().filter(name__iexact=name).first()
 

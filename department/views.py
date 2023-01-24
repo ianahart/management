@@ -1,18 +1,36 @@
-from rest_framework.exceptions import NotFound, ParseError, ValidationError
-from django.core.exceptions import BadRequest, ObjectDoesNotExist
-from rest_framework.decorators import permission_classes
+from rest_framework.exceptions import NotFound
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from department.models import Department
-import json
 import logging
 
 from department.serializers import CreateDepartmentSerializer, DepartmentSerializer, UpdateDepartmentSerializer
 
 
 logger = logging.getLogger('django')
+
+
+class AllDepartmentAPIView(APIView):
+
+    permission_classes = [IsAuthenticated, ]
+
+    def get(self, request):
+        try:
+            departments = Department.objects.retrieve_all()
+
+            serializer = DepartmentSerializer(departments, many=True)
+
+            return Response({
+                'message': 'success',
+                'departments': serializer.data,
+            })
+
+        except Exception as e:
+            return Response({
+                'error': str(e)
+            }, status=status.HTTP_404_NOT_FOUND)
 
 
 class DetailsAPIView(APIView):

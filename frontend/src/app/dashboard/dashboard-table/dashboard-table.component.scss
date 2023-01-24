@@ -1,0 +1,16 @@
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+  button {
+    border: none;
+    background: transparent;
+    margin: 1rem;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  p {
+    color: var(--color-text);
+  }
+}

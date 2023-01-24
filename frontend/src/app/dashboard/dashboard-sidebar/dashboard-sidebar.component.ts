@@ -4,6 +4,7 @@ import {
   faChalkboard,
   faRightFromBracket,
   faBuildingColumns,
+  faAward,
 } from '@fortawesome/free-solid-svg-icons';
 import { userState } from 'src/app/data';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,9 +15,10 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./dashboard-sidebar.component.scss'],
 })
 export class DashboardSidebarComponent implements OnInit {
-  faRightFromBracket = faRightFromBracket;
+  faAward = faAward;
   faChalkboard = faChalkboard;
   faBuildingColumns = faBuildingColumns;
+  faRightFromBracket = faRightFromBracket;
 
   constructor(private authService: AuthService, private router: Router) {}
 

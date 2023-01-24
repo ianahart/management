@@ -1,0 +1,54 @@
+<div class="container">
+  <app-dashboard-form
+    (submitEvent)="addCourse($event)"
+    [title]="'Add Course'"
+    [formGroup]="addCourseForm"
+  >
+    <div class="error" *ngIf="error">{{ error }}</div>
+    <div class="field">
+      <label for="name">Name</label>
+      <input formControlName="name" id="name" type="text" />
+    </div>
+    <div *ngIf="name?.dirty || name?.touched">
+      <div class="error" *ngIf="name?.errors?.['required']">
+        A name for the course is required.
+      </div>
+      <div class="error" *ngIf="name?.errors?.['maxlength']">
+        Name must not exceed 200 Characters.
+      </div>
+    </div>
+    <div class="field">
+      <label for="credits">Credits</label>
+      <input formControlName="credits" id="credits" type="text" />
+    </div>
+    <div *ngIf="credits?.dirty || credits?.touched">
+      <div class="error" *ngIf="credits?.errors?.['required']">
+        Credits for this course are required.
+      </div>
+      <div class="error" *ngIf="credits?.errors?.['maxlength']">
+        Credits must not exceed 1 character.
+      </div>
+    </div>
+    <div class="field">
+      <label for="semester">Semester (Spring or Fall)</label>
+      <input formControlName="semester" id="semester" type="text" />
+    </div>
+    <div *ngIf="semester?.dirty || semester?.touched">
+      <div class="error" *ngIf="semester?.errors?.['required']">
+        Semester for this course is required.
+      </div>
+      <div class="error" *ngIf="semester?.errors?.['maxlength']">
+        Semester must not exceed 20 characters.
+      </div>
+    </div>
+    <app-dashboard-select
+      (selectEvent)="selectDepartment($event)"
+      [selectedItem]="selectedDepartment"
+      [keys]="keys"
+      [items]="departments"
+    ></app-dashboard-select>
+    <div class="btn-container">
+      <button class="form-btn">Create</button>
+    </div>
+  </app-dashboard-form>
+</div>

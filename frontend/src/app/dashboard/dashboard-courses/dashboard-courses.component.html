@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>All Courses</h1>
+  <div class="input-container">
+    <input
+      [(ngModel)]="course"
+      (ngModelChange)="captureInput($event)"
+      placeholder="Search Course"
+      type="text"
+    />
+    <button (click)="search()">Search</button>
+  </div>
+  <div class="error">
+    {{ error }}
+  </div>
+  <app-dashboard-table
+    *ngIf="!error"
+    (prevEvent)="onPrev()"
+    (nextEvent)="onNext()"
+    [page]="page"
+    [totalPages]="totalPages"
+    [items]="courses"
+    [direction]="direction"
+    [keys]="keys"
+  ></app-dashboard-table>
+  <div class="actions">
+    <a routerLink="add">Add</a>
+  </div>
+</div>
