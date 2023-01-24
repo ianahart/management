@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { DashboardSidebarComponent } from './dashboard-sidebar/dashboard-sidebar.component';
 import { DashboardClassesComponent } from './dashboard-classes/dashboard-classes.component';
@@ -14,6 +14,8 @@ import { DashboardFormComponent } from './dashboard-form/dashboard-form.componen
 import { DashboardCoursesComponent } from './dashboard-courses/dashboard-courses.component';
 import { DashboardCoursesAddComponent } from './dashboard-courses-add/dashboard-courses-add.component';
 import { DashboardSelectComponent } from './dashboard-select/dashboard-select.component';
+import { DashboardTableComponent } from './dashboard-table/dashboard-table.component';
+import { DashboardCoursesModifyComponent } from './dashboard-courses-modify/dashboard-courses-modify.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +29,14 @@ import { DashboardSelectComponent } from './dashboard-select/dashboard-select.co
     DashboardCoursesComponent,
     DashboardCoursesAddComponent,
     DashboardSelectComponent,
+    DashboardTableComponent,
+    DashboardCoursesModifyComponent,
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     FontAwesomeModule,
   ],
 })

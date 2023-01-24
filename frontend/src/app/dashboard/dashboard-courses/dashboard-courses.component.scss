@@ -1,0 +1,43 @@
+.container {
+  padding-top: 2rem;
+}
+
+h1 {
+  color: var(--color-text);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+}
+
+.error {
+  color: var(--color-text);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.input-container {
+  margin-bottom: 1.5rem;
+  input {
+    width: 400px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    height: 35px;
+  }
+  button {
+    margin: 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    height: 35px;
+    color: #2e312e;
+    background-color: #ccc;
+    width: 120px;
+    border: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .input-container {
+    input {
+      width: 95%;
+    }
+  }
+}

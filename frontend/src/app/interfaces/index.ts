@@ -22,12 +22,31 @@ export interface IRetrieveDepartmentsResponse {
 }
 
 export interface ICreateCourseResponse {
-    message?: string;
+  message?: string;
 }
-
 
 export interface IRetrieveAllDepartmentsResponse {
   departments: IDepartment[];
+}
+
+export interface IRetrieveCoursesResponse {
+  message?: string;
+  page: number;
+  total_pages: number;
+  items: ICourse[];
+}
+
+export interface IRetrieveCourseResponse {
+  message?: string;
+  course: ICourse;
+}
+
+export interface ICourse {
+  credits: number;
+  department: IDepartment;
+  id: number;
+  name: string;
+  semester: string;
 }
 
 export interface ICreateAccountForm {
@@ -50,6 +69,13 @@ export interface IUpdateDepartmentForm {
 
 export interface IAddDepartmentForm {
   name: FormControl<string | null>;
+}
+
+export interface IUpdateCourseForm {
+  name: string;
+  credits: string;
+  semester: string;
+  department: string;
 }
 
 export interface IAddCourseForm {
@@ -79,8 +105,15 @@ export interface IUser {
 export interface IUpdateDepartmentResponse {
   message?: string;
 }
+export interface IUpdateCourseResponse {
+  message?: string;
+}
 
 export interface IDeleteDepartmentResponse {
+  message?: string;
+}
+
+export interface IDeleteCourseResponse {
   message?: string;
 }
 
