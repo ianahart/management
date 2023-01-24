@@ -5,6 +5,7 @@ import {
   faRightFromBracket,
   faBuildingColumns,
   faAward,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { userState } from 'src/app/data';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,6 +16,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./dashboard-sidebar.component.scss'],
 })
 export class DashboardSidebarComponent implements OnInit {
+  faUser = faUser;
   faAward = faAward;
   faChalkboard = faChalkboard;
   faBuildingColumns = faBuildingColumns;
