@@ -1,0 +1,9 @@
+<div class="container">
+  <app-student-form
+    (submitEvent)="updateStudent($event)"
+    [error]="error"
+    [formType]="'update'"
+    [btnText]="'Update'"
+    [title]="'Modify Student'"
+  ></app-student-form>
+</div>

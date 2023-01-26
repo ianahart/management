@@ -9,6 +9,11 @@ export interface IDepartment {
   name: string;
 }
 
+export interface IRetrieveStudentResponse {
+  message?: string;
+  student: IStudent;
+}
+
 export interface IStudentForm {
   name: FormControl<string | null>;
   email: FormControl<string | null>;

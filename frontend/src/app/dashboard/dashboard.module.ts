@@ -24,6 +24,7 @@ import { DashboardCoursesModifyComponent } from './dashboard-courses-modify/dash
 import { DashboardStudentsComponent } from './dashboard-students/dashboard-students.component';
 import { DashboardStudentsAddComponent } from './dashboard-students-add/dashboard-students-add.component';
 import { StudentFormComponent } from './student-form/student-form.component';
+import { DashboardStudentsModifyComponent } from './dashboard-students-modify/dashboard-students-modify.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { StudentFormComponent } from './student-form/student-form.component';
     DashboardStudentsComponent,
     DashboardStudentsAddComponent,
     StudentFormComponent,
+    DashboardStudentsModifyComponent,
   ],
   imports: [
     CommonModule,

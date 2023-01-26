@@ -14,6 +14,26 @@ from student.serializers import CreateStudentSerializer, StudentSerializer
 logger = logging.getLogger('django')
 
 
+class DetailsAPIView(APIView):
+
+    permission_classes = [IsAuthenticated, ]
+
+    def get(self, request, pk: int):
+        try:
+            student = Student.objects.get(pk=pk)
+
+            serializer = StudentSerializer(student)
+            return Response({
+                'message': 'success',
+                'student': serializer.data,
+            })
+
+        except Exception as e:
+            return Response({
+                'error': str(e),
+            }, status=status.HTTP_404_NOT_FOUND)
+
+
 class ListCreateAPIView(APIView):
 
     permission_classes = [IsAuthenticated, ]

@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { IRetrieveStudentsResponse, IStudentForm } from './interfaces';
+import {
+  IRetrieveStudentResponse,
+  IRetrieveStudentsResponse,
+  IStudent,
+  IStudentForm,
+} from './interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +20,12 @@ export class DashboardStudentService {
     return this.http
       .post<{ message: string }>(`${this.baseURL}/students/`, form)
       .pipe(map((x) => x.message));
+  }
+
+  retrieveStudent(id: number) {
+    return this.http
+      .get<IRetrieveStudentResponse>(`${this.baseURL}/students/${id}/`)
+      .pipe(map((x) => x.student));
   }
 
   retrieveStudents(page: number, direction: string) {

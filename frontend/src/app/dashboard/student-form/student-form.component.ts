@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IDepartment, IStudentForm } from 'src/app/interfaces';
 import { DashboardDepartmentService } from '../dashboard-department.service';
 import { states } from 'src/app/data';
+import { ActivatedRoute } from '@angular/router';
+import { DashboardStudentService } from 'src/app/dashboard-student.service';
 
 @Component({
   selector: 'app-student-form',
@@ -10,6 +12,7 @@ import { states } from 'src/app/data';
   styleUrls: ['./student-form.component.scss'],
 })
 export class StudentFormComponent implements OnInit {
+  @Input() btnText = '';
   @Input() error = '';
   @Input() title = '';
   @Input() formType = '';
@@ -21,18 +24,27 @@ export class StudentFormComponent implements OnInit {
   keys: string[] = [];
   states: { name: string; id: number }[] = states;
   selectedState = 'AL';
+  studentId = 0;
 
   constructor(
     private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private dashboardStudentService: DashboardStudentService,
     private dashboardDepartmentService: DashboardDepartmentService
   ) {}
 
   ngOnInit(): void {
+    if (this.formType === 'update') {
+      this.activatedRoute.params.subscribe((paramsId) => {
+        this.studentId = paramsId['id'];
+      });
+      this.populateForm();
+    }
     this.dashboardDepartmentService
       .retrieveAllDepartments()
       .subscribe((departments) => {
         this.departments = departments;
-        if (this.departments.length) {
+        if (this.departments.length && this.formType === 'create') {
           this.selectedDepartment = this.departments[0].name;
           this.studentForm.patchValue({
             department: this.departments[0].id.toString(),
@@ -59,6 +71,30 @@ export class StudentFormComponent implements OnInit {
       zip: ['', [Validators.required]],
     }),
   });
+
+  populateForm() {
+    this.dashboardStudentService
+      .retrieveStudent(this.studentId)
+      .subscribe((student) => {
+        console.log(student);
+        this.studentForm.patchValue({ name: student.name });
+        this.studentForm.patchValue({ email: student.email });
+        this.studentForm.patchValue({ gender: student.gender });
+        console.log(student.department.id.toString());
+
+        this.studentForm.patchValue({ section: student.section.toString() });
+        this.studentForm.patchValue({ dob: student.dob });
+        this.studentForm.patchValue({ address: { city: student.city } });
+        this.studentForm.patchValue({ address: { street: student.street } });
+        this.studentForm.patchValue({ address: { state: student.state } });
+        this.selectedState = student.state;
+        this.studentForm.patchValue({ address: { zip: student.zip } });
+        this.studentForm.patchValue({
+          department: student.department.id.toString(),
+        });
+        this.selectedDepartment = student.department.name;
+      });
+  }
 
   selectDepartment({ name, id }: IDepartment) {
     this.selectedDepartment = name;
