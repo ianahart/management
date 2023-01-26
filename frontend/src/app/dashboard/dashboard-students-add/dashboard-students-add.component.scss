@@ -1,0 +1,15 @@
+.container {
+  background-image: url("../../../assets/forms.png");
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error {
+  color: red;
+  font-size: 0.85rem;
+}

@@ -9,6 +9,7 @@ import { DashboardDepartmentsAddComponent } from './dashboard-departments-add/da
 import { DashboardDepartmentsModifyComponent } from './dashboard-departments-modify/dashboard-departments-modify.component';
 import { DashboardDepartmentsComponent } from './dashboard-departments/dashboard-departments.component';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
+import { DashboardStudentsAddComponent } from './dashboard-students-add/dashboard-students-add.component';
 import { DashboardStudentsComponent } from './dashboard-students/dashboard-students.component';
 
 const routes: Routes = [
@@ -46,6 +47,11 @@ const routes: Routes = [
   {
     path: 'departments/add',
     component: DashboardDepartmentsAddComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'students/add',
+    component: DashboardStudentsAddComponent,
     canActivate: [AuthGuard],
   },
   {

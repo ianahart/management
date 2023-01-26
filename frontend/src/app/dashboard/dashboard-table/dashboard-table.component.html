@@ -1,19 +1,21 @@
-<table>
-  <tr>
-    <th *ngFor="let key of keys">
-      {{ key | titlecase }}
-    </th>
-    <th>Action</th>
-  </tr>
-  <tr *ngFor="let item of items">
-    <td *ngFor="let key of keys">
-      {{ item[key] }}
-    </td>
-    <td>
-      <a routerLink="{{ item.id }}">Modify</a>
-    </td>
-  </tr>
-</table>
+<div class="container">
+  <table>
+    <tr>
+      <th *ngFor="let key of keys">
+        {{ key | titlecase }}
+      </th>
+      <th>Action</th>
+    </tr>
+    <tr *ngFor="let item of items">
+      <td *ngFor="let key of keys">
+        {{ item[key] }}
+      </td>
+      <td>
+        <a routerLink="{{ item.id }}">Modify</a>
+      </td>
+    </tr>
+  </table>
+</div>
 <div class="btn-container">
   <button *ngIf="page > 1" (click)="onPrev()">Prev</button>
   <p>{{ page }} of {{ totalPages }}</p>

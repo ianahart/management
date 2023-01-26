@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -17,6 +22,8 @@ import { DashboardSelectComponent } from './dashboard-select/dashboard-select.co
 import { DashboardTableComponent } from './dashboard-table/dashboard-table.component';
 import { DashboardCoursesModifyComponent } from './dashboard-courses-modify/dashboard-courses-modify.component';
 import { DashboardStudentsComponent } from './dashboard-students/dashboard-students.component';
+import { DashboardStudentsAddComponent } from './dashboard-students-add/dashboard-students-add.component';
+import { StudentFormComponent } from './student-form/student-form.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +40,8 @@ import { DashboardStudentsComponent } from './dashboard-students/dashboard-stude
     DashboardTableComponent,
     DashboardCoursesModifyComponent,
     DashboardStudentsComponent,
+    DashboardStudentsAddComponent,
+    StudentFormComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +49,11 @@ import { DashboardStudentsComponent } from './dashboard-students/dashboard-stude
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
   ],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
 })
 export class DashboardModule {}

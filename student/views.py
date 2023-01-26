@@ -8,6 +8,8 @@ from student.models import Student
 import json
 import logging
 
+from student.serializers import CreateStudentSerializer, StudentSerializer
+
 
 logger = logging.getLogger('django')
 
@@ -18,6 +20,11 @@ class ListCreateAPIView(APIView):
 
     def post(self, request):
         try:
+            serializer = CreateStudentSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+
+            Student.objects.create(serializer.validated_data)
+
             return Response({
                 'message': 'success'
             }, status.HTTP_200_OK)
@@ -30,12 +37,19 @@ class ListCreateAPIView(APIView):
     def get(self, request):
 
         try:
+            page, direction = request.query_params.values()
+            result = Student.objects.retrieve(page, direction)
+            serializer = StudentSerializer(result['items'], many=True)
             return Response({
                 'message': 'success',
+                'page': result['page'],
+                'total_pages': result['num_of_pages'],
+                'items': serializer.data,
 
             }, status=status.HTTP_200_OK)
 
         except Exception as e:
+            print(e)
             return Response({
                 'error': str(e),
             }, status=status.HTTP_404_NOT_FOUND)

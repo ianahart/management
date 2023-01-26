@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 
 export interface IRefreshUserResponse {
   user: IUser;
@@ -7,6 +7,19 @@ export interface IRefreshUserResponse {
 export interface IDepartment {
   id: number;
   name: string;
+}
+
+export interface IStudentForm {
+  name: FormControl<string | null>;
+  email: FormControl<string | null>;
+  gender: FormControl<string | null>;
+  department: FormControl<string | null>;
+  dob: FormControl<string | null>;
+  address: {
+    street: FormControl<string | null>;
+    state: FormControl<string | null>;
+    zip: FormControl<string | null>;
+  };
 }
 
 export interface IRetrieveDepartmentResponse {
@@ -19,6 +32,28 @@ export interface IRetrieveDepartmentsResponse {
   page: number;
   total_pages: number;
   departments: IDepartment[];
+}
+
+export interface IRetrieveStudentsResponse {
+  message?: string;
+  total_pages: number;
+  page: number;
+  items: IStudent[];
+}
+
+export interface IStudent {
+  id: number;
+  name: string;
+  department: IDepartment;
+  dob: string;
+  email: string;
+  gender: string;
+  section: number;
+  joining_date: string;
+  city: string;
+  street: string;
+  state: string;
+  zip: string;
 }
 
 export interface ICreateCourseResponse {

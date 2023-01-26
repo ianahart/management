@@ -27,12 +27,19 @@ export class DashboardSidebarComponent implements OnInit {
   ngOnInit(): void {}
 
   onLogout(): void {
-    this.authService.logout().subscribe((value) => {
-      if (value === 'success') {
+    this.authService.logout().subscribe(
+      (value) => {
+        if (value === 'success') {
+          this.authService.removeTokens();
+          this.authService.setUser(userState);
+          this.router.navigate(['/']);
+        }
+      },
+      (err) => {
+        this.router.navigate(['/']);
         this.authService.removeTokens();
         this.authService.setUser(userState);
-        this.router.navigate(['/']);
       }
-    });
+    );
   }
 }

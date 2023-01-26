@@ -80,7 +80,6 @@ export class DashboardCoursesComponent implements OnInit {
   }
 
   onPrev() {
-    console.log('prev');
     this.direction = 'prev';
     this.paginate();
   }

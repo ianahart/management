@@ -83,7 +83,8 @@ class LogoutAPIView(APIView):
             return Response({
                 'message': 'success'
             }, status=status.HTTP_200_OK)
-        except:
+        except Exception as e:
+            print(e)
             return Response({
                 'message': 'error',
             }, status=status.HTTP_400_BAD_REQUEST)

@@ -1,1 +1,16 @@
-<p>dashboard-students works!</p>
+<h1>All Students</h1>
+
+<app-dashboard-table
+  *ngIf="!error"
+  (prevEvent)="onPrev()"
+  (nextEvent)="onNext()"
+  [page]="page"
+  [totalPages]="totalPages"
+  [items]="students"
+  [direction]="direction"
+  [keys]="keys"
+></app-dashboard-table>
+
+<div class="actions btn-container">
+  <a routerLink="add">Add</a>
+</div>
