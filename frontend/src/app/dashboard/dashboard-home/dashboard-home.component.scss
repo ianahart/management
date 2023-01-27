@@ -9,6 +9,7 @@
   flex: 2;
   min-height: 100vh;
   background: #f4f4f4;
+  width: 800px;
 }
 
 .outlet-container {
@@ -23,5 +24,15 @@
 @media (max-width: 600px) {
   .container {
     flex-direction: column;
+  }
+}
+
+.outlet {
+  overflow-x: auto;
+}
+
+@media (max-width: 600px) {
+  .outlet {
+    width: 100%;
   }
 }

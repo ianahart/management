@@ -21,7 +21,7 @@ class StudentManager(models.Manager):
             student.section = data['section']
             student.dob = data['dob']
             student.street = data['address']['street'].title()
-            student.state = data['address']['state'].title()
+            student.state = data['address']['state']
             student.city = data['address']['city'].title()
             student.zip = data['address']['zip']
             student.department = data['department']

@@ -1,6 +1,6 @@
 .container {
   overflow-x: auto;
-  width: 800px;
+  width: 100%;
 }
 
 .btn-container {
@@ -17,5 +17,12 @@
 
   p {
     color: var(--color-text);
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: 0 auto;
+    width: 100%;
   }
 }
