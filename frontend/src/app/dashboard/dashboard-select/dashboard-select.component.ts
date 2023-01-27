@@ -15,6 +15,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./dashboard-select.component.scss'],
 })
 export class DashboardSelectComponent implements OnInit {
+  @Input() label = '';
   @Input() items: any[] = [];
   @Input() selectedItem = '';
   @Input() keys: string[] = [];

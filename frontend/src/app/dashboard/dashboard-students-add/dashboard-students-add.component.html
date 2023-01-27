@@ -1,0 +1,9 @@
+<div class="container">
+  <app-student-form
+    (submitEvent)="createStudent($event)"
+    [error]="error"
+    [formType]="'create'"
+    [title]="'Add Student'"
+    [btnText]="'Create'"
+  ></app-student-form>
+</div>

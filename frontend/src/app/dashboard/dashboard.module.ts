@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -16,6 +21,10 @@ import { DashboardCoursesAddComponent } from './dashboard-courses-add/dashboard-
 import { DashboardSelectComponent } from './dashboard-select/dashboard-select.component';
 import { DashboardTableComponent } from './dashboard-table/dashboard-table.component';
 import { DashboardCoursesModifyComponent } from './dashboard-courses-modify/dashboard-courses-modify.component';
+import { DashboardStudentsComponent } from './dashboard-students/dashboard-students.component';
+import { DashboardStudentsAddComponent } from './dashboard-students-add/dashboard-students-add.component';
+import { StudentFormComponent } from './student-form/student-form.component';
+import { DashboardStudentsModifyComponent } from './dashboard-students-modify/dashboard-students-modify.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +40,10 @@ import { DashboardCoursesModifyComponent } from './dashboard-courses-modify/dash
     DashboardSelectComponent,
     DashboardTableComponent,
     DashboardCoursesModifyComponent,
+    DashboardStudentsComponent,
+    DashboardStudentsAddComponent,
+    StudentFormComponent,
+    DashboardStudentsModifyComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +51,11 @@ import { DashboardCoursesModifyComponent } from './dashboard-courses-modify/dash
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
   ],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
 })
 export class DashboardModule {}

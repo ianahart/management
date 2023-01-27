@@ -1,5 +1,16 @@
 .container {
   position: relative;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+label {
+  width: 80%;
+  color: var(--color-text);
+  margin-bottom: 0.2rem;
 }
 
 .select {
@@ -8,7 +19,6 @@
   height: 35px;
   width: 80%;
   margin: 0 auto;
-  margin-top: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,6 +37,7 @@
 .select-contents {
   background: #fff;
   position: absolute;
+  z-index: 3;
   top: 35px;
   box-shadow: var(--box-shadow);
   border-radius: 8px;

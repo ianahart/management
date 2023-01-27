@@ -1,0 +1,80 @@
+:host {
+  width: 100%;
+  margin: 0 auto;
+}
+
+form {
+  width: 500px;
+  min-height: 500px;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  background-color: #fff;
+  padding-bottom: 1rem;
+  margin: 0 auto;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+
+  h1 {
+    color: var(--color-text);
+    font-size: 1.3rem;
+  }
+}
+
+.fieldrow {
+  display: flex;
+  div {
+    &:first-of-type {
+      width: 300px;
+    }
+    &:last-of-type {
+      margin-top: 1.6rem;
+    }
+  }
+
+  width: 100%;
+}
+
+.server-error {
+  color: red;
+  font-size: 0.85rem;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.error {
+  font-size: 0.85rem;
+  color: red;
+  text-align: center;
+}
+
+.date-picker {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  margin-top: 2rem;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0;
+  button {
+    margin: 0.5rem;
+  }
+}
+
+.delete-btn {
+  color: #fff;
+  background-color: var(--color-text);
+}
+
+@media (max-width: 600px) {
+  form {
+    width: 95%;
+  }
+}

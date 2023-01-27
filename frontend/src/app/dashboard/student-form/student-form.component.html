@@ -1,0 +1,125 @@
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+  <header>
+    <h1>{{ title }}</h1>
+  </header>
+  <div class="server-error">{{ error }}</div>
+  <div class="field">
+    <label for="name">Name</label>
+    <input formControlName="name" type="text" id="name" />
+  </div>
+  <div *ngIf="name?.dirty || name?.touched">
+    <div class="error" *ngIf="name?.errors?.['required']">
+      A name is required.
+    </div>
+    <div class="error" *ngIf="name?.errors?.['maxlength']">
+      Name must not exceed 200 Characters.
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="email">Email</label>
+    <input formControlName="email" type="email" id="email" />
+  </div>
+  <div *ngIf="email?.dirty || email?.touched">
+    <div class="error" *ngIf="email?.errors?.['required']">
+      An email is required.
+    </div>
+    <div class="error" *ngIf="email?.errors?.['email']">
+      Please provide a valid email address.
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="gender">Gender</label>
+    <input formControlName="gender" type="text" id="gender" />
+  </div>
+  <div *ngIf="gender?.dirty || gender?.touched">
+    <div class="error" *ngIf="gender?.errors?.['required']">
+      A gender is required.
+    </div>
+    <div class="error" *ngIf="gender?.errors?.['maxlength']">
+      Gender must not exceed 20 Characters.
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="section">Section</label>
+    <input formControlName="section" type="text" id="section" />
+  </div>
+  <div *ngIf="section?.dirty || section?.touched">
+    <div class="error" *ngIf="section?.errors?.['required']">
+      A section is required.
+    </div>
+  </div>
+  <div class="date-picker">
+    <mat-form-field>
+      <input
+        placeholder="Date of Birth"
+        formControlName="dob"
+        matInput
+        [matDatepicker]="datepicker"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="datepicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #datepicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div formGroupName="address" class="address">
+    <div class="field">
+      <label for="city">City</label>
+      <input formControlName="city" type="text" id="city" />
+    </div>
+    <div *ngIf="city?.dirty || city?.touched">
+      <div class="error" *ngIf="city?.errors?.['required']">
+        A City is required.
+      </div>
+    </div>
+    <div class="field">
+      <label for="street">Street</label>
+      <input formControlName="street" type="text" id="street" />
+    </div>
+    <div *ngIf="street?.dirty || street?.touched">
+      <div class="error" *ngIf="street?.errors?.['required']">
+        A street is required.
+      </div>
+    </div>
+    <app-dashboard-select
+      (selectEvent)="selectDepartment($event)"
+      [selectedItem]="selectedDepartment"
+      [keys]="keys"
+      [items]="departments"
+      [label]="'Dept'"
+    ></app-dashboard-select>
+
+    <div class="fieldrow">
+      <div>
+        <app-dashboard-select
+          (selectEvent)="selectState($event)"
+          [selectedItem]="selectedState"
+          [keys]="['name']"
+          [items]="states"
+          [label]="'State'"
+        ></app-dashboard-select>
+      </div>
+      <div class="field">
+        <label for="zip">Zip</label>
+        <input type="text" formControlName="zip" id="zip" />
+      </div>
+    </div>
+  </div>
+  <div class="btn-container">
+    <button class="form-btn">{{ btnText }}</button>
+    <button
+      (click)="deleteStudent($event)"
+      *ngIf="formType === 'update'"
+      class="form-btn delete-btn"
+    >
+      Delete
+    </button>
+  </div>
+</form>
