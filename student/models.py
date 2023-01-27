@@ -1,4 +1,5 @@
 from datetime import datetime
+from dateutil import parser
 from typing import Dict
 from django.core.exceptions import BadRequest
 from django.db import models
@@ -9,6 +10,23 @@ from services.pagination import Pagination
 
 class StudentManager(models.Manager):
 
+    def update(self, pk: int, data: Dict):
+        self.__validate_student(data, 'update')
+        student = Student.objects.all().filter(pk=pk).first()
+
+        if student is not None:
+            student.name = data['name'].title()
+            student.email = data['email']
+            student.gender = data['gender'].title()
+            student.section = data['section']
+            student.dob = data['dob']
+            student.street = data['address']['street'].title()
+            student.state = data['address']['state'].title()
+            student.city = data['address']['city'].title()
+            student.zip = data['address']['zip']
+            student.department = data['department']
+            student.save()
+
     def retrieve(self, page: int, direction: str):
         objs = Student.objects.all().order_by('-id')
 
@@ -16,9 +34,9 @@ class StudentManager(models.Manager):
         data = paginator.paginate()
         return data
 
-    def __validate_student(self, data: Dict):
+    def __validate_student(self, data: Dict, action: str):
         student = Student.objects.filter(email=data['email']).first()
-        if student is not None:
+        if student is not None and action == 'create':
             raise BadRequest('A student with that email already exists.')
 
         if data['section'] > 4:
@@ -33,7 +51,7 @@ class StudentManager(models.Manager):
                 'Please choose a gender of male, female, or non-binary.')
 
     def create(self, data: Dict):
-        self.__validate_student(data)
+        self.__validate_student(data, 'create')
 
         student = self.model(
             name=data['name'],

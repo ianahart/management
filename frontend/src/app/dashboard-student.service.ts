@@ -28,6 +28,18 @@ export class DashboardStudentService {
       .pipe(map((x) => x.student));
   }
 
+  updateStudent(id: string | null, form: IStudentForm) {
+    return this.http
+      .patch<{ message: string }>(`${this.baseURL}/students/${id}/`, { form })
+      .pipe(map((x) => x.message));
+  }
+
+  deleteStudent(id: number) {
+    return this.http
+      .delete<{ message: string }>(`${this.baseURL}/students/${id}/`)
+      .pipe(map((x) => x.message));
+  }
+
   retrieveStudents(page: number, direction: string) {
     return this.http.get<IRetrieveStudentsResponse>(
       `${this.baseURL}/students/`,

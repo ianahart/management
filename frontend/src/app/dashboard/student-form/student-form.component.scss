@@ -59,8 +59,18 @@ header {
 
 .btn-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin: 1.5rem 0;
+  button {
+    margin: 0.5rem;
+  }
+}
+
+.delete-btn {
+  color: #fff;
+  background-color: var(--color-text);
 }
 
 @media (max-width: 600px) {

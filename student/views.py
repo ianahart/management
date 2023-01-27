@@ -8,7 +8,7 @@ from student.models import Student
 import json
 import logging
 
-from student.serializers import CreateStudentSerializer, StudentSerializer
+from student.serializers import CreateStudentSerializer, StudentSerializer, UpdateStudentSerializer
 
 
 logger = logging.getLogger('django')
@@ -18,9 +18,45 @@ class DetailsAPIView(APIView):
 
     permission_classes = [IsAuthenticated, ]
 
+
+
+    def delete(self, request, pk: int):
+        try:
+
+            student = Student.objects.get(pk=pk)
+            student.delete()
+
+            return Response({
+                                'message': 'success'
+                            }, status=status.HTTP_200_OK)
+
+
+        except Exception as e:
+            return Response({
+                                'error': str(e),
+                            }, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request, pk: int):
+        try:
+            serializer = UpdateStudentSerializer(data=request.data['form'])
+            serializer.is_valid(raise_exception=True)
+            Student.objects.update(pk, serializer.validated_data)
+
+            return Response({
+                'message': 'success',
+            }, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({
+                'error': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+
     def get(self, request, pk: int):
         try:
-            student = Student.objects.get(pk=pk)
+            student = Student.objects.all().filter(pk=pk).first()
+
+            if student is None:
+                raise NotFound("Student doesn't exist.")
 
             serializer = StudentSerializer(student)
             return Response({

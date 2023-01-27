@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IDepartment, IStudentForm } from 'src/app/interfaces';
 import { DashboardDepartmentService } from '../dashboard-department.service';
 import { states } from 'src/app/data';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardStudentService } from 'src/app/dashboard-student.service';
 
 @Component({
@@ -28,6 +28,7 @@ export class StudentFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private dashboardStudentService: DashboardStudentService,
     private dashboardDepartmentService: DashboardDepartmentService
@@ -38,13 +39,12 @@ export class StudentFormComponent implements OnInit {
       this.activatedRoute.params.subscribe((paramsId) => {
         this.studentId = paramsId['id'];
       });
-      this.populateForm();
     }
     this.dashboardDepartmentService
       .retrieveAllDepartments()
       .subscribe((departments) => {
         this.departments = departments;
-        if (this.departments.length && this.formType === 'create') {
+        if (this.departments.length) {
           this.selectedDepartment = this.departments[0].name;
           this.studentForm.patchValue({
             department: this.departments[0].id.toString(),
@@ -55,6 +55,7 @@ export class StudentFormComponent implements OnInit {
           );
         }
       });
+    this.populateForm();
   }
 
   studentForm = this.fb.group({
@@ -72,11 +73,21 @@ export class StudentFormComponent implements OnInit {
     }),
   });
 
-  populateForm() {
+  deleteStudent(event: Event) {
+    event.preventDefault();
     this.dashboardStudentService
-      .retrieveStudent(this.studentId)
-      .subscribe((student) => {
-        console.log(student);
+      .deleteStudent(this.studentId)
+      .subscribe((message) => {
+        if (message === 'success') {
+          this.router.navigate(['dashboard/students']);
+        }
+      });
+  }
+
+  populateForm() {
+    if (this.studentId === 0) return;
+    this.dashboardStudentService.retrieveStudent(this.studentId).subscribe(
+      (student) => {
         this.studentForm.patchValue({ name: student.name });
         this.studentForm.patchValue({ email: student.email });
         this.studentForm.patchValue({ gender: student.gender });
@@ -93,7 +104,11 @@ export class StudentFormComponent implements OnInit {
           department: student.department.id.toString(),
         });
         this.selectedDepartment = student.department.name;
-      });
+      },
+      ({ error }) => {
+        this.error = error.error;
+      }
+    );
   }
 
   selectDepartment({ name, id }: IDepartment) {

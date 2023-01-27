@@ -99,7 +99,6 @@ table {
     color: #fff;
     text-decoration: none;
     background-color: var(--color-secondary);
-    border-radius: 20px;
     border: none;
     cursor: pointer;
     display: flex;
@@ -145,6 +144,7 @@ th {
     border: 1px solid #ccc;
     height: 35px;
     border-radius: 8px;
+    color: var(--color-text);
   }
 }
 
