@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="content">
+    <div class="field">
+      <p>
+        Are you sure you want to delete the class
+        <strong
+          [ngClass]="
+            studentClass.course_name.toLowerCase() !== confirm.toLowerCase()
+              ? 'no-highlight'
+              : 'highlight'
+          "
+          >{{ studentClass.course_name }}</strong
+        >
+        belonging to <strong>{{ studentClass.student_name }}</strong> ?
+      </p>
+      <input
+        (ngModelChange)="handleOnChange($event)"
+        id="confirm"
+        type="text"
+        placeholder="Type name of class"
+        [(ngModel)]="confirm"
+      />
+    </div>
+    <div class="btn-container">
+      <button (click)="onDelete()" class="form-btn">Delete</button>
+    </div>
+  </div>
+</div>

@@ -14,6 +14,17 @@ export interface IRetrieveStudentResponse {
   student: IStudent;
 }
 
+export interface ICreateClassForm {
+  semester: string;
+  student: string;
+  course: string;
+}
+
+export interface IRetrieveClassResponse {
+  message?: string;
+  student_class: IClass;
+}
+
 export interface IStudentForm {
   name: FormControl<string | null>;
   email: FormControl<string | null>;
@@ -25,6 +36,21 @@ export interface IStudentForm {
     state: FormControl<string | null>;
     zip: FormControl<string | null>;
   };
+}
+
+export interface IClass {
+  id: number;
+  student_name: string;
+  course_name: string;
+  semester: string;
+  year: string;
+}
+
+export interface IRetrieveClassesResponse {
+  message?: string;
+  total_pages: 6;
+  page: 1;
+  items: IClass[];
 }
 
 export interface IRetrieveDepartmentResponse {

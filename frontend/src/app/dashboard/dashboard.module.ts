@@ -25,6 +25,9 @@ import { DashboardStudentsComponent } from './dashboard-students/dashboard-stude
 import { DashboardStudentsAddComponent } from './dashboard-students-add/dashboard-students-add.component';
 import { StudentFormComponent } from './student-form/student-form.component';
 import { DashboardStudentsModifyComponent } from './dashboard-students-modify/dashboard-students-modify.component';
+import { DashboardClassesAddComponent } from './dashboard-classes-add/dashboard-classes-add.component';
+import { DashboardClassSelectComponent } from './dashboard-class-select/dashboard-class-select.component';
+import { DashboardClassesModifyComponent } from './dashboard-classes-modify/dashboard-classes-modify.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,9 @@ import { DashboardStudentsModifyComponent } from './dashboard-students-modify/da
     DashboardStudentsAddComponent,
     StudentFormComponent,
     DashboardStudentsModifyComponent,
+    DashboardClassesAddComponent,
+    DashboardClassSelectComponent,
+    DashboardClassesModifyComponent,
   ],
   imports: [
     CommonModule,

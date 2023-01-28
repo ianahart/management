@@ -1,0 +1,54 @@
+.container {
+  background-image: url("../../../assets/forms.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  min-height: 300px;
+  width: 500px;
+  border-radius: 8px;
+  background: #fff;
+  padding: 0.5rem;
+}
+p {
+  text-align: center;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.no-highlight {
+  color: var(--color-text);
+}
+
+.highlight {
+  background: var(--color-secondary);
+  border-radius: 20px;
+  padding: 0.25rem;
+  color: #fff;
+}
+
+strong {
+  color: var(--color-text);
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  button {
+    background-color: #c7cbc7;
+  }
+}
+
+@media (max-width: 600px) {
+  .content {
+    width: 95%;
+    margin: 0 auto;
+  }
+}

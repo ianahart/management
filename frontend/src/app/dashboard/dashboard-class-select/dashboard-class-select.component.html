@@ -1,0 +1,20 @@
+<div class="container">
+  <label>{{ label }}</label>
+  <div id="select" (click)="openSelectDropDown(true)" class="select">
+    <p>{{ selectedItem }}</p>
+    <fa-icon [icon]="faChevronDown"></fa-icon>
+  </div>
+  <div *ngIf="isDropDownOpen" class="select-contents overflow-scroll">
+    <p (click)="selectItem(item)" *ngFor="let item of items">
+      {{ item.name }}
+    </p>
+    <p
+      *ngIf="page !== totalPages"
+      (click)="onLoadMore()"
+      role="button"
+      class="load-more"
+    >
+      Load more...
+    </p>
+  </div>
+</div>
