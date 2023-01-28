@@ -1,1 +1,27 @@
-<p>dashboard-classes works!</p>
+<h1>All Classes</h1>
+<div class="input-container">
+  <input
+    [(ngModel)]="studentClass"
+    (ngModelChange)="captureInput($event)"
+    type="text"
+    placeholder="Search Class"
+  />
+  <button (click)="search()">Search</button>
+</div>
+<div class="error">
+  {{ error }}
+</div>
+
+<app-dashboard-table
+  *ngIf="!error"
+  (prevEvent)="onPrev()"
+  (nextEvent)="onNext()"
+  [page]="page"
+  [totalPages]="totalPages"
+  [items]="classes"
+  [direction]="direction"
+  [keys]="keys"
+></app-dashboard-table>
+<div class="actions btn-container">
+  <a routerLink="add">Add</a>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+  <div *ngIf="error" class="error-container">{{ error }}</div>
+  <app-dashboard-form
+    (submitEvent)="addClass($event)"
+    [title]="'Add Class'"
+    [formGroup]="addClassForm"
+  >
+    <app-dashboard-class-select
+      [label]="'Student'"
+      [items]="students"
+      [page]="studentPage"
+      [totalPages]="studentTotalPages"
+      [selectedItem]="selectedStudent"
+      (selectEvent)="selectStudent($event)"
+      (loadEvent)="loadMore($event)"
+    ></app-dashboard-class-select>
+    <app-dashboard-class-select
+      [label]="'Course'"
+      [items]="courses"
+      [page]="coursePage"
+      [totalPages]="courseTotalPages"
+      [selectedItem]="selectedCourse"
+      (selectEvent)="selectCourse($event)"
+      (loadEvent)="loadMore($event)"
+    ></app-dashboard-class-select>
+    <div class="field">
+      <label for="semester">Semester</label>
+      <input type="text" formControlName="semester" id="semester" />
+    </div>
+    <div *ngIf="semester?.dirty || semester?.touched">
+      <div class="error" *ngIf="semester?.errors?.['required']">
+        A semester is required.
+      </div>
+    </div>
+    <div class="btn-container">
+      <button class="form-btn">Create</button>
+    </div>
+  </app-dashboard-form>
+</div>

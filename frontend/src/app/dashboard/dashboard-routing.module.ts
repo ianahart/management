@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
+import { DashboardClassesAddComponent } from './dashboard-classes-add/dashboard-classes-add.component';
+import { DashboardClassesModifyComponent } from './dashboard-classes-modify/dashboard-classes-modify.component';
 import { DashboardClassesComponent } from './dashboard-classes/dashboard-classes.component';
 import { DashboardCoursesAddComponent } from './dashboard-courses-add/dashboard-courses-add.component';
 import { DashboardCoursesModifyComponent } from './dashboard-courses-modify/dashboard-courses-modify.component';
@@ -56,6 +58,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'classes/add',
+    component: DashboardClassesAddComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'courses/:id',
     component: DashboardCoursesModifyComponent,
     canActivate: [AuthGuard],
@@ -68,6 +75,11 @@ const routes: Routes = [
   {
     path: 'students/:id',
     component: DashboardStudentsModifyComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'classes/:id',
+    component: DashboardClassesModifyComponent,
     canActivate: [AuthGuard],
   },
 ];

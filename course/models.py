@@ -4,7 +4,6 @@ from django.utils import timezone
 from typing import Dict, Union
 from services.pagination import Pagination
 
-
 class CourseManager(models.Manager):
 
     def update(self, pk: int, validated_data: Dict):
