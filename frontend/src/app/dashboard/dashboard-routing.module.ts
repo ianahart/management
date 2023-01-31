@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
+import { DashboardAttendanceComponent } from './dashboard-attendance/dashboard-attendance.component';
 import { DashboardClassesAddComponent } from './dashboard-classes-add/dashboard-classes-add.component';
 import { DashboardClassesModifyComponent } from './dashboard-classes-modify/dashboard-classes-modify.component';
 import { DashboardClassesComponent } from './dashboard-classes/dashboard-classes.component';
@@ -38,6 +39,11 @@ const routes: Routes = [
       {
         path: 'students',
         component: DashboardStudentsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'attendance',
+        component: DashboardAttendanceComponent,
         canActivate: [AuthGuard],
       },
     ],

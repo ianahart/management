@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   faChalkboard,
+  faChalkboardUser,
   faRightFromBracket,
   faBuildingColumns,
   faAward,
@@ -19,6 +20,7 @@ export class DashboardSidebarComponent implements OnInit {
   faUser = faUser;
   faAward = faAward;
   faChalkboard = faChalkboard;
+  faChalkboardUser = faChalkboardUser;
   faBuildingColumns = faBuildingColumns;
   faRightFromBracket = faRightFromBracket;
 

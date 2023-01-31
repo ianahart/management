@@ -1,9 +1,12 @@
+from datetime import timezone
 from re import search
+from django.utils.timezone import datetime, now, utc
 from rest_framework.exceptions import NotFound, ParseError, ValidationError
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from attendance.models import Attendance
 from student_class.models import StudentClass
 
 from student_class.serializers import ClassSerializer, CreateClassSerializer, SearchClassSerializer
@@ -105,6 +108,14 @@ class ListCreateAPIView(APIView):
             serializer.is_valid(raise_exception=True)
 
             StudentClass.objects.create(serializer.validated_data)
+            Attendance.objects.create(
+                serializer.validated_data['student'],
+                serializer.validated_data['course'],
+                False,
+                datetime.now(tz=timezone.utc)
+            )
+
+            print(serializer.validated_data)
             return Response({
                 'message': 'success',
             }, status=status.HTTP_200_OK)

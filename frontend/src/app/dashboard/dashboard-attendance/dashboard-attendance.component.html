@@ -1,0 +1,62 @@
+<div class="container">
+  <h1>Mark Attendance</h1>
+  <div class="content">
+    <form [formGroup]="attendanceForm" (ngSubmit)="onSubmit()">
+      <app-dashboard-class-select
+        [label]="'Course'"
+        [items]="courses"
+        [page]="coursePage"
+        [totalPages]="courseTotalPages"
+        [selectedItem]="selectedCourse"
+        (selectEvent)="selectCourse($event)"
+        (loadEvent)="loadMore($event)"
+      ></app-dashboard-class-select>
+      <div class="btn-container">
+        <button>Search Course</button>
+      </div>
+    </form>
+    <div *ngIf="attendees.length" class="table-container">
+      <div class="actions-row">
+        <div class="date-picker">
+          <mat-form-field>
+            <input
+              (dateChange)="onDateChange()"
+              placeholder="Date 1-23-2023"
+              [formControl]="date"
+              matInput
+              [matDatepicker]="datepicker"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="datepicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #datepicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="attendance-btns">
+          <button (click)="markAll('present')">Mark All Present</button>
+          <button (click)="markAll('absent')">Mark All Absent</button>
+        </div>
+      </div>
+      <table>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Mark Present</th>
+        </tr>
+        <tr *ngFor="let attendee of attendees">
+          <td>{{ attendee.student.id }}</td>
+          <td>{{ attendee.student.name }}</td>
+          <td>
+            <input
+              [checked]="attendee.status"
+              [(ngModel)]="attendee.status"
+              (click)="onCheckBoxChange($event, attendee.student.id)"
+              type="checkbox"
+            />
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
