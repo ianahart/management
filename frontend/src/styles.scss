@@ -131,14 +131,15 @@ table {
 
 td {
   color: var(--color-text);
+  border-bottom: 1px solid #f8f4f4;
 }
 
 th {
-  color: var(--color-primary);
+  color: #fff;
+  background-color: var(--color-primary);
 }
 td,
 th {
-  border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }

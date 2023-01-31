@@ -64,3 +64,9 @@ label {
     }
   }
 }
+
+@media (max-width: 600px) {
+  .select {
+    width: 100%;
+  }
+}

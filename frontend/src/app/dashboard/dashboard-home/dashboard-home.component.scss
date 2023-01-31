@@ -18,10 +18,11 @@
   background: #fff;
   padding: 0.5rem;
   margin-top: 5rem;
+  width: 100%;
   box-shadow: var(--box-shadow);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .container {
     flex-direction: column;
   }
@@ -31,7 +32,7 @@
   overflow-x: auto;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .outlet {
     width: 100%;
   }

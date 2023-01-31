@@ -49,10 +49,10 @@ export class DashboardClassesModifyComponent implements OnInit {
 
     this.dashboardClassService
       .deleteClass(this.studentClass.id)
-            .subscribe(({ message }) => {
-                if (message === 'success') {
-                    this.router.navigate(['dashboard/classes'])
-                }
-            });
+      .subscribe(({ message }) => {
+        if (message === 'success') {
+          this.router.navigate(['dashboard/classes']);
+        }
+      });
   }
 }

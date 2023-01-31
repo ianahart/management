@@ -38,6 +38,20 @@ export interface IStudentForm {
   };
 }
 
+export interface IAttendanceCourseForm {
+  course: FormControl<string | null>;
+}
+
+export interface IRetrieveAttendeesResponse {
+  message?: string;
+  attendees: IAttendee[];
+}
+
+export interface IAttendee {
+  student: IStudent;
+  status: boolean;
+}
+
 export interface IClass {
   id: number;
   student_name: string;
