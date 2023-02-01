@@ -1,7 +1,56 @@
+:host {
+  display: flex;
+}
+
 .container {
   min-height: 100vh;
   background-color: var(--color-primary);
   width: 250px;
+}
+
+.hide {
+  position: absolute;
+  /*transform: translateX(-400px);*/
+  animation: slideback 0.5s forwards;
+}
+
+@keyframes slideback {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-400px);
+  }
+}
+
+@keyframes slideforwards {
+  0% {
+    transform: translateX(-400px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.show {
+  position: relative;
+  animation: slideforwards 0.5s forwards;
+}
+
+.handle {
+  background: var(--color-primary);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  fa-icon {
+    color: var(--color-text);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+  }
 }
 
 .links {
@@ -14,6 +63,18 @@ header {
   padding: 0.5rem;
   h1 {
     color: #fff;
+  }
+}
+
+.hamburger {
+  margin-left: 2rem;
+}
+
+.menu-icon {
+  cursor: pointer;
+  fa-icon {
+    color: var(--color-text);
+    font-size: 1.5rem;
   }
 }
 

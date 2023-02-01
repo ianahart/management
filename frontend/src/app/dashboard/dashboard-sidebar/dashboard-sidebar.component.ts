@@ -5,8 +5,12 @@ import {
   faChalkboardUser,
   faRightFromBracket,
   faBuildingColumns,
+  faGripVertical,
   faAward,
   faUser,
+  faHouse,
+  faXmark,
+  faBars,
 } from '@fortawesome/free-solid-svg-icons';
 import { userState } from 'src/app/data';
 import { AuthService } from 'src/app/services/auth.service';
@@ -18,12 +22,17 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class DashboardSidebarComponent implements OnInit {
   faUser = faUser;
+  faBars = faBars;
+  faXmark = faXmark;
   faAward = faAward;
+  faHouse = faHouse;
   faChalkboard = faChalkboard;
+  faGripVertical = faGripVertical;
   faChalkboardUser = faChalkboardUser;
   faBuildingColumns = faBuildingColumns;
   faRightFromBracket = faRightFromBracket;
 
+  isLinksShowing = true;
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
@@ -38,10 +47,14 @@ export class DashboardSidebarComponent implements OnInit {
         }
       },
       (err) => {
-        this.router.navigate(['/']);
         this.authService.removeTokens();
         this.authService.setUser(userState);
+        this.router.navigate(['/']);
       }
     );
+  }
+
+  setIsLinkShowing(isShowing: boolean) {
+    this.isLinksShowing = isShowing;
   }
 }

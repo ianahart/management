@@ -30,7 +30,7 @@ export class LoginHomeComponent implements OnInit {
       ({ user, tokens }) => {
         this.authService.storeTokens(tokens);
         this.authService.setUser(user);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard/overview']);
       },
       ({ error }) => {
         this.error = error.message;
