@@ -72,6 +72,7 @@ export class DashboardAttendanceComponent implements OnInit {
   selectCourse(course: ICourse) {
     this.selectedCourse = course.name;
     this.attendanceForm.patchValue({ course: course.id.toString() });
+    console.log(dayjs.utc());
     this.date.patchValue(dayjs.utc());
   }
 
@@ -82,8 +83,6 @@ export class DashboardAttendanceComponent implements OnInit {
   }
 
   onSubmit() {
-    const d = new Date();
-    console.log(d.toUTCString());
     if (this.attendanceForm.invalid) return;
     const course = this.attendanceForm.get('course')?.value;
     if (!course || !this.date.value) return;
@@ -114,6 +113,10 @@ export class DashboardAttendanceComponent implements OnInit {
     this.dashboardAttendanceService
       .markAll(type, course, this.date.value)
       .subscribe();
+  }
+
+  formattedDate() {
+    return dayjs.utc().format('DD-MM-YYYY');
   }
 
   get course() {
