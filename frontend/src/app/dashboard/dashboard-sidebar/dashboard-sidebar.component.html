@@ -1,8 +1,32 @@
-<div class="container">
+<div (click)="setIsLinkShowing(true)" *ngIf="!isLinksShowing" class="handle">
+  <fa-icon [icon]="faGripVertical"></fa-icon>
+</div>
+
+<div [ngClass]="isLinksShowing ? 'show' : 'hide'" class="container">
   <header>
     <h1>CMS NSTAT</h1>
   </header>
-  <div class="links">
+  <div class="hamburger">
+    <div
+      (click)="setIsLinkShowing(false)"
+      *ngIf="isLinksShowing"
+      class="menu-icon"
+    >
+      <fa-icon [icon]="faXmark"></fa-icon>
+    </div>
+    <div
+      (click)="setIsLinkShowing(true)"
+      *ngIf="!isLinksShowing"
+      class="menu-icon"
+    >
+      <fa-icon [icon]="faBars"></fa-icon>
+    </div>
+  </div>
+  <div *ngIf="isLinksShowing" class="links">
+    <div class="link">
+      <fa-icon [icon]="faHouse"></fa-icon>
+      <a routerLink="./overview">Overview</a>
+    </div>
     <div class="link">
       <fa-icon [icon]="faUser"></fa-icon>
       <a routerLink="./students">Manage Students</a>
