@@ -2,6 +2,8 @@ from typing import Dict, List, Union
 from django.db import models
 from django.utils import timezone
 from datetime import datetime, timedelta
+import pytz
+
 
 from student_class.models import StudentClass
 
@@ -64,15 +66,18 @@ class AttendanceManager(models.Manager):
             exists.status = status
             exists.save()
 
-    def retrieve_attendees(self, course: str):
+    def retrieve_attendees(self, data):
         student_classes = StudentClass.objects.all().filter(
-            course_id=course)
+            course_id=data['course'].id)
         attendees: List[Dict[str, Union[str, int]]] = []
 
+        date = datetime.now(tz=pytz.timezone(
+            'US/Eastern')).strftime('%Y-%m-%d')
+        print('FOOOOO', date)
         for student_class in student_classes:
             attendee = Attendance.objects.all().filter(
                 student_id=student_class.student.id).filter(
-                course_id=student_class.course.id).filter(date=datetime.now(tz=timezone.utc)).first()
+                course_id=student_class.course.id).filter(date=date).first()
             attendees.append({
                 'student': student_class.student,
                 'status': False if attendee is None or attendee.status == False else True

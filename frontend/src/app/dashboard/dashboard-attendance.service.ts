@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Dayjs } from 'dayjs';
 import { IRetrieveAttendeesResponse } from '../interfaces';
 
 @Injectable({
@@ -10,7 +11,7 @@ export class DashboardAttendanceService {
 
   constructor(private http: HttpClient) {}
 
-  onChangeDateAttendance(date: Date, course: string) {
+  onChangeDateAttendance(date: Dayjs, course: string) {
     return this.http.post<IRetrieveAttendeesResponse>(
       `${this.baseURL}/attendances/date/`,
       {
@@ -20,7 +21,7 @@ export class DashboardAttendanceService {
     );
   }
 
-  markAll(type: string, course: string, date: Date) {
+  markAll(type: string, course: string, date: Dayjs) {
     return this.http.post(`${this.baseURL}/attendances/all/`, {
       type,
       course,
@@ -28,7 +29,12 @@ export class DashboardAttendanceService {
     });
   }
 
-  markAttendance(status: boolean, course: string, date: Date, student: number) {
+  markAttendance(
+    status: boolean,
+    course: string,
+    date: Dayjs,
+    student: number
+  ) {
     return this.http.post(`${this.baseURL}/attendances/`, {
       student,
       course,
@@ -37,13 +43,12 @@ export class DashboardAttendanceService {
     });
   }
 
-  retrieveStudentAttendances(course: string) {
-    return this.http.get<IRetrieveAttendeesResponse>(
-      `${this.baseURL}/attendances/`,
+  retrieveStudentAttendances(course: string, date: Dayjs) {
+    return this.http.post<IRetrieveAttendeesResponse>(
+      `${this.baseURL}/attendances/initial/`,
       {
-        params: {
-          course,
-        },
+        course,
+        date,
       }
     );
   }

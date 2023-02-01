@@ -5,7 +5,7 @@ from rest_framework.views import APIView, Response
 from rest_framework.permissions import IsAuthenticated
 
 from attendance.models import Attendance
-from attendance.serializers import AllAttendanceSerializer, AttendanceSerializer, CreateAttendanceSerializer, DateAttendanceSerializer
+from attendance.serializers import AllAttendanceSerializer, AttendanceSerializer, CreateAttendanceSerializer, DateAttendanceSerializer, InitialAttendanceSerializer
 
 
 class AttendanceMarkAllAPIView(APIView):
@@ -52,6 +52,32 @@ class AttendanceDateAPIView(APIView):
             return Response({
                 'error': str(e)
             }, status=status.HTTP_404_NOT_FOUND)
+
+
+class AttendanceInitialAPIView(APIView):
+
+    permission_classes = [IsAuthenticated, ]
+
+    def post(self, request):
+
+        try:
+            initial_serializer = InitialAttendanceSerializer(data=request.data)
+            initial_serializer.is_valid(raise_exception=True)
+
+            print(request.data, '!!!!!!!!!!!!!!!')
+            attendees = Attendance.objects.retrieve_attendees(
+                initial_serializer.validated_data)
+            serializer = AttendanceSerializer(attendees, many=True)
+
+            return Response({
+                'message': 'success',
+                'attendees': serializer.data
+            }, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({
+                'error': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ListCreateAPIView(APIView):

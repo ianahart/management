@@ -4,6 +4,9 @@ import { DashboardCourseService } from '../dashboard-course.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DashboardAttendanceService } from '../dashboard-attendance.service';
+import * as utc from 'dayjs/plugin/utc';
+dayjs.extend(utc);
+import * as dayjs from 'dayjs';
 @Component({
   selector: 'app-dashboard-attendance',
   templateUrl: './dashboard-attendance.component.html',
@@ -28,8 +31,8 @@ export class DashboardAttendanceComponent implements OnInit {
   ngOnInit(): void {
     this.retrieveCourses();
   }
-
-  date = new FormControl(new Date());
+  // @ts-ignore
+  date = new FormControl(dayjs.utc());
   attendanceForm = this.fb.group({
     course: ['', [Validators.required]],
   });
@@ -69,7 +72,7 @@ export class DashboardAttendanceComponent implements OnInit {
   selectCourse(course: ICourse) {
     this.selectedCourse = course.name;
     this.attendanceForm.patchValue({ course: course.id.toString() });
-    this.date.patchValue(new Date());
+    this.date.patchValue(dayjs.utc());
   }
 
   loadMore(value: string) {
@@ -79,11 +82,13 @@ export class DashboardAttendanceComponent implements OnInit {
   }
 
   onSubmit() {
+    const d = new Date();
+    console.log(d.toUTCString());
     if (this.attendanceForm.invalid) return;
     const course = this.attendanceForm.get('course')?.value;
-    if (!course) return;
+    if (!course || !this.date.value) return;
     this.dashboardAttendanceService
-      .retrieveStudentAttendances(course)
+      .retrieveStudentAttendances(course, this.date.value)
       .subscribe(({ attendees }) => {
         this.attendees = attendees;
       });
