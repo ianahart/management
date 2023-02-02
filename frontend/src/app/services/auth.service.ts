@@ -57,6 +57,10 @@ export class AuthService {
     localStorage.removeItem('tokens');
   }
 
+  getUser() {
+    return this.user;
+  }
+
   setUser(user: IUser) {
     this.user = user;
   }
