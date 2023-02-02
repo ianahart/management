@@ -1,0 +1,96 @@
+<div class="container">
+  <header>
+    <h1>Student Report</h1>
+  </header>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div class="search-input-container">
+    <div class="field">
+      <label for="search">Search Student</label>
+      <div class="input">
+        <input
+          autocomplete="off"
+          [formControl]="searchTerm"
+          type="text"
+          id="search"
+          (keydown)="onKeyDown($event)"
+          placeholder="Student name"
+        />
+        <app-dashboard-student-report-dropdown
+          (selectStudentNameEvent)="selectStudentName($event)"
+          (closeDropDownEvent)="openSelectDropDown($event)"
+          [studentNames]="studentNames"
+          [isSelectDropDownOpen]="isSelectDropDownOpen"
+        ></app-dashboard-student-report-dropdown>
+        <div class="btn-container">
+          <button (click)="retrieveSearchedStudent()">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="student.id !== 0" class="student-report">
+    <div class="student-section-container">
+      <h1>Basics</h1>
+      <div class="basics">
+        <div class="basics-row">
+          <div class="student-element-container">
+            <fa-icon [icon]="faUser"></fa-icon>
+            <p>{{ student.name }}</p>
+          </div>
+          <div class="student-element-container">
+            <fa-icon [icon]="faEnvelope"></fa-icon>
+            <p>{{ student.email }}</p>
+          </div>
+        </div>
+        <div class="basics-row">
+          <div class="student-element-container">
+            <fa-icon [icon]="faCalendarPlus"></fa-icon>
+            <p>{{ student.joining_date }}</p>
+          </div>
+          <div class="student-element-container">
+            <fa-icon [icon]="faCakeCandles"></fa-icon>
+            <p>{{ student.dob }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---section-two-->
+    <div class="student-section-container">
+      <h1>Address</h1>
+      <div class="basics">
+        <div class="basics-row">
+          <div class="student-element-container">
+            <fa-icon [icon]="faRoad"></fa-icon>
+            <p>{{ student.street }}</p>
+          </div>
+          <div class="student-element-container">
+            <fa-icon [icon]="faCity"></fa-icon>
+            <p>{{ student.city }}</p>
+          </div>
+        </div>
+        <div class="basics-row">
+          <div class="student-element-container">
+            <fa-icon [icon]="faStreetView"></fa-icon>
+            <p>{{ student.state }}</p>
+          </div>
+          <div class="student-element-container">
+            <fa-icon [icon]="faLocationPin"></fa-icon>
+            <p>{{ student.zip }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---section-two-->
+    <div class="student-section-container">
+      <h1>Classes</h1>
+      <div class="department">
+        <p>Department:</p>
+        <p>{{ student.department.name }}</p>
+      </div>
+      <div class="classes">
+        <p *ngFor="let studentClass of studentClasses">
+          {{ studentClass.course_name }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

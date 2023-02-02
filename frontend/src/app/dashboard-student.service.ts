@@ -2,8 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import {
+  IRetrieveSearchedStudentResponse,
   IRetrieveStudentResponse,
   IRetrieveStudentsResponse,
+  ISearchRetrieveStudentNameResponse,
   IStudent,
   IStudentForm,
 } from './interfaces';
@@ -49,6 +51,23 @@ export class DashboardStudentService {
           direction,
         },
       }
+    );
+  }
+
+  searchStudent(term: string, page: number, direction: string) {
+    return this.http.post<ISearchRetrieveStudentNameResponse>(
+      `${this.baseURL}/students/search/`,
+      {
+        term,
+        page,
+        direction,
+      }
+    );
+  }
+
+  retrieveSearchedStudent(id: number) {
+    return this.http.get<IRetrieveSearchedStudentResponse>(
+      `${this.baseURL}/students/search/${id}/`
     );
   }
 }

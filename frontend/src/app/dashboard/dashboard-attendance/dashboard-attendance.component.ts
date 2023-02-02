@@ -5,6 +5,8 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DashboardAttendanceService } from '../dashboard-attendance.service';
 import * as utc from 'dayjs/plugin/utc';
+import * as timezone from 'dayjs/plugin/timezone';
+dayjs.extend(timezone);
 dayjs.extend(utc);
 import * as dayjs from 'dayjs';
 @Component({
@@ -72,7 +74,6 @@ export class DashboardAttendanceComponent implements OnInit {
   selectCourse(course: ICourse) {
     this.selectedCourse = course.name;
     this.attendanceForm.patchValue({ course: course.id.toString() });
-    console.log(dayjs.utc());
     this.date.patchValue(dayjs.utc());
   }
 
@@ -116,7 +117,10 @@ export class DashboardAttendanceComponent implements OnInit {
   }
 
   formattedDate() {
-    return dayjs.utc().format('DD-MM-YYYY');
+    const d = new Date();
+    return dayjs(`${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}`)
+      .utc()
+      .format('MM-DD-YYYY');
   }
 
   get course() {

@@ -5,6 +5,21 @@ export const userState = {
   avatar_url: '',
 };
 
+export const studentState = {
+  id: 0,
+  name: '',
+  department: { name: '', id: 0 },
+  dob: '',
+  email: '',
+  section: 0,
+  gender: '',
+  joining_date: '',
+  city: '',
+  street: '',
+  state: '',
+  zip: '',
+};
+
 export const states = [
   { name: 'AL', id: 1 },
   { name: 'AK', id: 2 },

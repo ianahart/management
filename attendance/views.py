@@ -64,7 +64,6 @@ class AttendanceInitialAPIView(APIView):
             initial_serializer = InitialAttendanceSerializer(data=request.data)
             initial_serializer.is_valid(raise_exception=True)
 
-            print(request.data, '!!!!!!!!!!!!!!!')
             attendees = Attendance.objects.retrieve_attendees(
                 initial_serializer.validated_data)
             serializer = AttendanceSerializer(attendees, many=True)

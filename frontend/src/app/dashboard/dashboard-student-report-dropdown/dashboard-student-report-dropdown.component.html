@@ -1,0 +1,8 @@
+<div *ngIf="isSelectDropDownOpen" class="container overflow-scroll">
+  <p
+    (click)="selectStudentName(studentName)"
+    *ngFor="let studentName of studentNames"
+  >
+    {{ studentName.name }}
+  </p>
+</div>
