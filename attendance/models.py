@@ -50,6 +50,10 @@ class AttendanceManager(models.Manager):
 
     def handle_attendance(self, data: Dict):
         student, course, status, date = data.values()
+
+        date = datetime.now(tz=pytz.timezone(
+            'US/Eastern')).strftime('%Y-%m-%d')
+
         exists = Attendance.objects.filter(student__id=student.id).filter(
             course__id=course.id).filter(date=date).first()
 
@@ -73,7 +77,6 @@ class AttendanceManager(models.Manager):
 
         date = datetime.now(tz=pytz.timezone(
             'US/Eastern')).strftime('%Y-%m-%d')
-        print('FOOOOO', date)
         for student_class in student_classes:
             attendee = Attendance.objects.all().filter(
                 student_id=student_class.student.id).filter(

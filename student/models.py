@@ -4,11 +4,38 @@ from typing import Dict
 from django.core.exceptions import BadRequest
 from django.db import models
 from django.utils import timezone
+from rest_framework.exceptions import NotFound
 
 from services.pagination import Pagination
+from student_class.models import StudentClass
 
 
 class StudentManager(models.Manager):
+
+    def retrieve_searched_student(self, pk: int):
+        student = Student.objects.get(pk=pk)
+        classes = []
+        for student_class in student.course_students.all():
+            student_class.course_name = student_class.course.name
+            student_class.student_name = student_class.student.name
+            classes.append(student_class)
+
+        return {
+            'student': student,
+            'classes': classes,
+        }
+
+    def search(self, data: Dict):
+        objs = Student.objects.filter(
+            name__icontains=data['term']).order_by('-id')
+
+        if len(objs) == 0:
+            raise NotFound('no matches found for ' + data['term'])
+
+        paginator = Pagination(objs, data['page'], data['direction'])
+        data = paginator.paginate()
+
+        return data
 
     def update(self, pk: int, data: Dict):
         self.__validate_student(data, 'update')

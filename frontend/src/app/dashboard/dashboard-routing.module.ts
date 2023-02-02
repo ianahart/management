@@ -13,6 +13,7 @@ import { DashboardDepartmentsModifyComponent } from './dashboard-departments-mod
 import { DashboardDepartmentsComponent } from './dashboard-departments/dashboard-departments.component';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { DashboardOverviewComponent } from './dashboard-overview/dashboard-overview.component';
+import { DashboardStudentReportsComponent } from './dashboard-student-reports/dashboard-student-reports.component';
 import { DashboardStudentsAddComponent } from './dashboard-students-add/dashboard-students-add.component';
 import { DashboardStudentsModifyComponent } from './dashboard-students-modify/dashboard-students-modify.component';
 import { DashboardStudentsComponent } from './dashboard-students/dashboard-students.component';
@@ -50,6 +51,11 @@ const routes: Routes = [
       {
         path: 'attendance',
         component: DashboardAttendanceComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'student-reports',
+        component: DashboardStudentReportsComponent,
         canActivate: [AuthGuard],
       },
     ],

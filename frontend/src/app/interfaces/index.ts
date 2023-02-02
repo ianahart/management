@@ -20,6 +20,24 @@ export interface ICreateClassForm {
   course: string;
 }
 
+export interface IStudentName {
+  id: number;
+  name: string;
+}
+
+export interface IRetrieveSearchedStudentResponse {
+  message?: string;
+  classes: IClass[];
+  student: IStudent;
+}
+
+export interface ISearchRetrieveStudentNameResponse {
+  message?: string;
+  page: number;
+  total_pages: number;
+  student_names: IStudentName[];
+}
+
 export interface IRetrieveClassResponse {
   message?: string;
   student_class: IClass;
