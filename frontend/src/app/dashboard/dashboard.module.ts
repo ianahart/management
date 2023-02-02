@@ -32,6 +32,8 @@ import { DashboardAttendanceComponent } from './dashboard-attendance/dashboard-a
 import { DashboardOverviewComponent } from './dashboard-overview/dashboard-overview.component';
 import { DashboardStudentReportsComponent } from './dashboard-student-reports/dashboard-student-reports.component';
 import { DashboardStudentReportDropdownComponent } from './dashboard-student-report-dropdown/dashboard-student-report-dropdown.component';
+import { DashboardStaffsComponent } from './dashboard-staffs/dashboard-staffs.component';
+import { DashboardStaffsAddComponent } from './dashboard-staffs-add/dashboard-staffs-add.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { DashboardStudentReportDropdownComponent } from './dashboard-student-rep
     DashboardOverviewComponent,
     DashboardStudentReportsComponent,
     DashboardStudentReportDropdownComponent,
+    DashboardStaffsComponent,
+    DashboardStaffsAddComponent,
   ],
   imports: [
     CommonModule,
