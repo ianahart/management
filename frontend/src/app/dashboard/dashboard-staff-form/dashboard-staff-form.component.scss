@@ -1,0 +1,77 @@
+:host {
+  width: 100%;
+}
+
+form {
+  width: 550px;
+  background: #fff;
+  box-shadow: var(--box-shadow);
+  border-radius: 8px;
+  min-height: 600px;
+  padding: 0.5rem;
+  margin: 0 auto;
+}
+
+.selected-courses-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.selected-course {
+  margin: 1rem;
+  border-radius: 8px;
+  position: relative;
+  padding: 0.5rem;
+  box-shadow: var(--box-shadow);
+  fa-icon {
+    position: absolute;
+    right: 0;
+    top: -5px;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+  p {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    margin: 0.1rem;
+  }
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+
+  button {
+    width: 80%;
+    transition: all 0.25s ease-in;
+    background: var(--color-secondary);
+    color: #fff;
+    height: 35px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+.error {
+  text-align: center;
+  font-size: 0.85rem;
+  color: red;
+}
+
+header {
+  text-align: center;
+  h1 {
+    color: var(--color-text);
+  }
+}
+
+@media (max-width: 600px) {
+  form {
+    width: 95%;
+  }
+}

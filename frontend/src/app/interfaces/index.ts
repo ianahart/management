@@ -9,6 +9,14 @@ export interface IDepartment {
   name: string;
 }
 
+export interface ICreateStaffForm {
+  email: string;
+  name: string;
+  contact: string;
+  department: string;
+  courses: ICourse[];
+}
+
 export interface IRetrieveStudentResponse {
   message?: string;
   student: IStudent;

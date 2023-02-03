@@ -12,6 +12,9 @@ from student_class.models import StudentClass
 
 class StudentManager(models.Manager):
 
+    def retrieve_student_email(self, email: str):
+        return Student.objects.filter(email=email).first()
+
     def retrieve_searched_student(self, pk: int):
         student = Student.objects.get(pk=pk)
         classes = []

@@ -8,6 +8,7 @@ import {
   faGripVertical,
   faAward,
   faUser,
+  faUsers,
   faHouse,
   faXmark,
   faBars,
@@ -24,6 +25,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class DashboardSidebarComponent implements OnInit {
   faUser = faUser;
   faBars = faBars;
+  faUsers = faUsers;
   faXmark = faXmark;
   faAward = faAward;
   faHouse = faHouse;

@@ -1,0 +1,74 @@
+<form [formGroup]="staffForm" (ngSubmit)="onSubmit()">
+  <header>
+    <h1>Create Staff</h1>
+  </header>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div class="field">
+    <label for="email">Email</label>
+    <input formControlName="email" type="email" id="email" />
+  </div>
+  <div *ngIf="email?.dirty || email?.touched">
+    <div class="error" *ngIf="email?.errors?.['required']">
+      An email is required.
+    </div>
+    <div class="error" *ngIf="email?.errors?.['email']">
+      Please provide a valid email address.
+    </div>
+  </div>
+  <div class="field">
+    <label for="name">Name</label>
+    <input formControlName="name" type="text" id="name" />
+  </div>
+  <div *ngIf="name?.dirty || name?.touched">
+    <div class="error" *ngIf="name?.errors?.['required']">
+      A name is required.
+    </div>
+    <div class="error" *ngIf="name?.errors?.['maxlength']">
+      Name must not exceed 200 Characters.
+    </div>
+  </div>
+  <div class="field">
+    <label for="name">Contact</label>
+    <input formControlName="contact" type="text" id="name" />
+  </div>
+  <div *ngIf="contact?.dirty || contact?.touched">
+    <div class="error" *ngIf="contact?.errors?.['required']">
+      A contact is required.
+    </div>
+    <div class="error" *ngIf="contact?.errors?.['pattern']">
+      Please provide a valid phone number.
+    </div>
+  </div>
+  <div class="select-container">
+    <app-dashboard-select
+      (selectEvent)="selectDepartment($event)"
+      [selectedItem]="selectedDepartment"
+      [keys]="keys"
+      [items]="departments"
+      [label]="'Dept'"
+    ></app-dashboard-select>
+  </div>
+  <div class="classes-container">
+    <app-dashboard-class-select
+      [label]="'Course'"
+      [items]="courses"
+      [page]="page"
+      [totalPages]="totalPages"
+      [selectedItem]="selectedCourse"
+      (selectEvent)="selectCourse($event)"
+      (loadEvent)="loadMore($event)"
+    ></app-dashboard-class-select>
+  </div>
+  <div *ngIf="selectedCourses.length" class="selected-courses-container">
+    <div *ngFor="let selectedCourse of selectedCourses" class="selected-course">
+      <fa-icon
+        (click)="deselectCourse(selectedCourse)"
+        [icon]="faXmark"
+      ></fa-icon>
+      <p>{{ selectedCourse.name }}</p>
+    </div>
+  </div>
+  <div class="btn-container">
+    <button type="submit">Create</button>
+  </div>
+</form>
