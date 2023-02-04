@@ -35,6 +35,7 @@ import { DashboardStudentReportDropdownComponent } from './dashboard-student-rep
 import { DashboardStaffsComponent } from './dashboard-staffs/dashboard-staffs.component';
 import { DashboardStaffsAddComponent } from './dashboard-staffs-add/dashboard-staffs-add.component';
 import { DashboardStaffFormComponent } from './dashboard-staff-form/dashboard-staff-form.component';
+import { DashboardStaffsModifyComponent } from './dashboard-staffs-modify/dashboard-staffs-modify.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { DashboardStaffFormComponent } from './dashboard-staff-form/dashboard-st
     DashboardStaffsComponent,
     DashboardStaffsAddComponent,
     DashboardStaffFormComponent,
+    DashboardStaffsModifyComponent,
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ICourse, IDepartment } from 'src/app/interfaces';
+import { ICourse, IDepartment, IStaff } from 'src/app/interfaces';
 import { DashboardCourseService } from '../dashboard-course.service';
 import { DashboardDepartmentService } from '../dashboard-department.service';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { DashboardStaffService } from '../dashboard-staff.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-staff-form',
@@ -23,6 +25,7 @@ export class DashboardStaffFormComponent implements OnInit {
   selectedItem = '';
   selectedCourse = '';
   selectedCourses: ICourse[] = [];
+  staffId = 0;
 
   @Input() error = '';
   @Input() formType = '';
@@ -33,11 +36,20 @@ export class DashboardStaffFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
     private dashboardDepartmentService: DashboardDepartmentService,
-    private dashboardCourseService: DashboardCourseService
+    private dashboardCourseService: DashboardCourseService,
+    private dashboardStaffService: DashboardStaffService
   ) {}
 
   ngOnInit(): void {
+    if (this.formType === 'update') {
+      this.activatedRoute.params.subscribe((paramsId) => {
+        this.staffId = paramsId['id'];
+      });
+      this.retrieveStaffMember();
+    }
+
     this.retrieveDepartments();
     this.retrieveCourses();
   }
@@ -60,6 +72,34 @@ export class DashboardStaffFormComponent implements OnInit {
   deselectCourse(course: ICourse) {
     this.selectedCourses = this.selectedCourses.filter(
       (c) => c.id !== course.id
+    );
+  }
+
+  patchValues(staff_member: IStaff) {
+    console.log(staff_member.department.name);
+    this.selectedDepartment = staff_member.department.name;
+
+    this.selectDepartment(staff_member.department);
+    this.keys = Object.keys(staff_member.department).filter((d) => d !== 'id');
+
+    console.log(staff_member.department);
+    this.staffForm.patchValue({
+      name: staff_member.name,
+      email: staff_member.email,
+      contact: staff_member.contact,
+      department: staff_member.department.id.toString(),
+    });
+    this.selectedCourses = staff_member.courses;
+  }
+
+  retrieveStaffMember() {
+    this.dashboardStaffService.retrieveStaffMember(this.staffId).subscribe(
+      ({ staff_member }) => {
+        this.patchValues(staff_member);
+      },
+      (err) => {
+        this.error = 'This staff member does not exist.';
+      }
     );
   }
 
@@ -94,7 +134,7 @@ export class DashboardStaffFormComponent implements OnInit {
       .retrieveAllDepartments()
       .subscribe((departments) => {
         this.departments = [...this.departments, ...departments];
-        if (this.departments.length) {
+        if (this.departments.length && this.formType === 'create') {
           this.selectDepartment(this.departments[0]);
           this.keys = Object.keys(this.departments[0]).filter(
             (d) => d !== 'id'

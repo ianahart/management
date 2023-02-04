@@ -14,6 +14,7 @@ import { DashboardDepartmentsComponent } from './dashboard-departments/dashboard
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { DashboardOverviewComponent } from './dashboard-overview/dashboard-overview.component';
 import { DashboardStaffsAddComponent } from './dashboard-staffs-add/dashboard-staffs-add.component';
+import { DashboardStaffsModifyComponent } from './dashboard-staffs-modify/dashboard-staffs-modify.component';
 import { DashboardStaffsComponent } from './dashboard-staffs/dashboard-staffs.component';
 import { DashboardStudentReportsComponent } from './dashboard-student-reports/dashboard-student-reports.component';
 import { DashboardStudentsAddComponent } from './dashboard-students-add/dashboard-students-add.component';
@@ -110,6 +111,11 @@ const routes: Routes = [
   {
     path: 'classes/:id',
     component: DashboardClassesModifyComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'staffs/:id',
+    component: DashboardStaffsModifyComponent,
     canActivate: [AuthGuard],
   },
 ];

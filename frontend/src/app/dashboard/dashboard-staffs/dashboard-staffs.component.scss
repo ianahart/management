@@ -1,0 +1,78 @@
+.container {
+  overflow-x: auto;
+}
+
+.close-icon-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.modal-content-container {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+table {
+  margin: 0;
+  width: 100%;
+}
+
+.modal-content {
+  width: 400px;
+  background: #fff;
+  box-shadow: var(--box-shadow);
+  border-radius: 8px;
+  min-height: 300px;
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.pagination {
+  margin-top: 3rem;
+  display: flex;
+  p {
+    color: var(--color-text);
+  }
+  button {
+    margin: 0 1rem;
+    border: none;
+    background: transparent;
+    color: var(--color-text);
+    transition: all 0.25s ease-in;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
+
+.close-icon {
+  cursor: pointer;
+  color: #fff;
+  font-size: 2.6rem;
+}
+
+.view-class-btn {
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  fa-icon {
+    margin-left: 0.25rem;
+    color: var(--color-text);
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    width: 95%;
+  }
+}

@@ -9,6 +9,20 @@ export interface IDepartment {
   name: string;
 }
 
+export interface IStaff {
+  id: number;
+  name: string;
+  email: string;
+  contact: string;
+  department: IDepartment;
+  courses: ICourse[];
+}
+
+export interface IRetrieveStaffMemberResponse {
+  message?: string;
+  staff_member: IStaff;
+}
+
 export interface ICreateStaffForm {
   email: string;
   name: string;
@@ -221,6 +235,13 @@ export interface IDeleteDepartmentResponse {
 
 export interface IDeleteCourseResponse {
   message?: string;
+}
+
+export interface IRetrieveAllStaffResponse {
+  message?: string;
+  total_pages: number;
+  page: number;
+  staffs: IStaff[];
 }
 
 export interface ILoginResponse {

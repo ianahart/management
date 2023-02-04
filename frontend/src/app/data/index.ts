@@ -5,6 +5,15 @@ export const userState = {
   avatar_url: '',
 };
 
+export const staffState = {
+  id: 0,
+  name: '',
+  email: '',
+  contact: '',
+  department: { name: '', id: 0 },
+  courses: [],
+};
+
 export const studentState = {
   id: 0,
   name: '',

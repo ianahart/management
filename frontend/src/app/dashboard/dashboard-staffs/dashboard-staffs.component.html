@@ -1,3 +1,59 @@
+<div class="container">
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Contact</th>
+      <th>Courses</th>
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor="let staff of staffs">
+      <td>{{ staff.id }}</td>
+      <td>{{ staff.name }}</td>
+      <td>{{ staff.email }}</td>
+      <td>{{ staff.contact }}</td>
+      <td class="view-class-btn" (click)="selectStaff(staff)">
+        <p>View</p>
+        <fa-icon [icon]="faChevronRight"></fa-icon>
+      </td>
+      <div *ngIf="staff.id === selectedStaff.id" class="modal">
+        <div class="close-icon-container">
+          <fa-icon
+            (click)="closeModal()"
+            class="close-icon"
+            [icon]="faXmark"
+          ></fa-icon>
+        </div>
+        <div class="modal-content-container">
+          <div class="modal-content">
+            <table>
+              <tr>
+                <th>Id</th>
+                <th>Course Name</th>
+              </tr>
+              <ng-container *ngIf="selectedStaff.id !== 0">
+                <tr *ngFor="let course of selectedStaff.courses">
+                  <td>{{ course.id }}</td>
+                  <td>{{ course.name }}</td>
+                </tr>
+              </ng-container>
+            </table>
+          </div>
+        </div>
+      </div>
+      <td class="modify-btn-container">
+        <a routerLink="{{ staff.id }}" class="modify-btn">Modify</a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="pagination">
+  <button *ngIf="page !== 1" (click)="onPrev()">Prev</button>
+  <p>{{ page }} of {{ totalPages }}</p>
+  <button *ngIf="page !== totalPages" (click)="onNext()">Next</button>
+</div>
+
 <div class="actions btn-container">
   <a routerLink="add">Add</a>
 </div>
