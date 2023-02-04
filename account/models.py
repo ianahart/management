@@ -23,6 +23,9 @@ logger = logging.getLogger('django')
 
 class CustomUserManager(BaseUserManager):
 
+    def admin_by_email(self, email: str):
+        return CustomUser.objects.filter(email=email).first()
+
     def reset_password(self, password: str, token: str, pk: int):
         user = None
         try:
