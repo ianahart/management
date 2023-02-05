@@ -1,0 +1,6 @@
+/api/* https://cms-nstat.herokuapp.com/api/:splat  200
+
+
+/*    /index.html   200
+
+

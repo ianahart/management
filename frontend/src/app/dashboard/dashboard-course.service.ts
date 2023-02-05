@@ -17,7 +17,7 @@ import {
   providedIn: 'root',
 })
 export class DashboardCourseService {
-  private baseURL = 'http://localhost:4200/api/v1';
+  private baseURL = 'https://cms-nstat.netlify.app/api/v1/'
 
   constructor(private http: HttpClient) {}
 
