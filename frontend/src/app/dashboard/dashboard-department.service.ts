@@ -15,7 +15,7 @@ import { map, pluck } from 'rxjs';
   providedIn: 'root',
 })
 export class DashboardDepartmentService {
-  private baseURL = 'https://cms-nstat.netlify.app/api/v1/'
+  private baseURL = 'https://cms-nstat.netlify.app/api/v1'
 
   constructor(private http: HttpClient) {}
 
