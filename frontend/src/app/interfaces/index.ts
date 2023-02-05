@@ -9,6 +9,11 @@ export interface IDepartment {
   name: string;
 }
 
+export interface IChartsResponse {
+  message?: string;
+  bar_chart_data: Record<string | number, number[]>[];
+}
+
 export interface IStaff {
   id: number;
   name: string;

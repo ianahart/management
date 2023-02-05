@@ -3,11 +3,28 @@ from django.core.exceptions import BadRequest
 from django.db import models
 from django.utils import timezone
 from rest_framework.exceptions import NotFound
+from django.db.models import Count
 
 from services.pagination import Pagination
 
 
 class StudentClassManager(models.Manager):
+
+    def chart_data(self):
+        student_classes = StudentClass.objects.all()
+        data = {}
+
+        for student_class in student_classes:
+            if student_class.course.name not in data:
+                data[student_class.course.name] = 1
+            else:
+                data[student_class.course.name] = data[student_class.course.name] + 1
+
+        sorted_data = sorted(
+            data.items(), key=lambda x: x[1], reverse=True)[0:5]
+
+        sorted_data = [{key: value} for key, value in sorted_data]
+        return sorted_data
 
     def get_student_class(self, pk: int):
         student_class = StudentClass.objects.all().filter(pk=pk).first()

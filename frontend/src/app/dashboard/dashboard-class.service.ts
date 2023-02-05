@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import {
+  IChartsResponse,
   ICreateClassForm,
   IRetrieveClassesResponse,
   IRetrieveClassResponse,
@@ -14,6 +15,10 @@ export class DashboardClassService {
   private baseURL = 'http://localhost:4200/api/v1';
 
   constructor(private http: HttpClient) {}
+
+  chartsClass() {
+    return this.http.get<IChartsResponse>(`${this.baseURL}/classes/charts/`);
+  }
 
   retrieveClass(id: string) {
     return this.http.get<IRetrieveClassResponse>(

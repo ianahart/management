@@ -12,6 +12,26 @@ from student_class.models import StudentClass
 from student_class.serializers import ClassSerializer, CreateClassSerializer, SearchClassSerializer
 
 
+
+class ChartsAPIView(APIView):
+
+    permission_classes = [IsAuthenticated, ]
+
+    def get(self, request):
+        try:
+            data= StudentClass.objects.chart_data()
+            return Response({
+                                'message': 'success',
+                                'bar_chart_data': data,
+                            }, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({
+                                'error': str(e),
+                            }, status=status.HTTP_404_NOT_FOUND)
+
+
+
 class DetailsAPIView(APIView):
 
     permission_classes = [IsAuthenticated, ]

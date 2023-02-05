@@ -13,6 +13,7 @@ import {
   faXmark,
   faBars,
   faBookOpenReader,
+  faChartBar,
 } from '@fortawesome/free-solid-svg-icons';
 import { userState } from 'src/app/data';
 import { AuthService } from 'src/app/services/auth.service';
@@ -29,6 +30,7 @@ export class DashboardSidebarComponent implements OnInit {
   faXmark = faXmark;
   faAward = faAward;
   faHouse = faHouse;
+  faChartBar = faChartBar;
   faChalkboard = faChalkboard;
   faGripVertical = faGripVertical;
   faChalkboardUser = faChalkboardUser;

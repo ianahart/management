@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgChartsModule } from 'ng2-charts';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
@@ -17,7 +18,13 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     NavBarComponent,
     NotFoundComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NoopAnimationsModule],
+  imports: [
+    BrowserModule,
+    NgChartsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NoopAnimationsModule,
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
     AuthService,

@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { NgChartsModule } from 'ng2-charts';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -36,6 +37,7 @@ import { DashboardStaffsComponent } from './dashboard-staffs/dashboard-staffs.co
 import { DashboardStaffsAddComponent } from './dashboard-staffs-add/dashboard-staffs-add.component';
 import { DashboardStaffFormComponent } from './dashboard-staff-form/dashboard-staff-form.component';
 import { DashboardStaffsModifyComponent } from './dashboard-staffs-modify/dashboard-staffs-modify.component';
+import { DashboardAnalyticsComponent } from './dashboard-analytics/dashboard-analytics.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import { DashboardStaffsModifyComponent } from './dashboard-staffs-modify/dashbo
     DashboardStaffsAddComponent,
     DashboardStaffFormComponent,
     DashboardStaffsModifyComponent,
+    DashboardAnalyticsComponent,
   ],
   imports: [
     CommonModule,
@@ -77,6 +80,7 @@ import { DashboardStaffsModifyComponent } from './dashboard-staffs-modify/dashbo
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
+    NgChartsModule,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
 })

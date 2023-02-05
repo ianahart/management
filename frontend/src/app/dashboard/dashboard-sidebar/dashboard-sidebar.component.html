@@ -27,37 +27,43 @@
       <fa-icon [icon]="faHouse"></fa-icon>
       <a routerLink="./overview">Overview</a>
     </div>
-    <div class="link">
-      <fa-icon [icon]="faUsers"></fa-icon>
-      <a routerLink="./staffs">Manage Staff</a>
-    </div>
-    <div class="link">
-      <fa-icon [icon]="faUser"></fa-icon>
-      <a routerLink="./students">Manage Students</a>
-    </div>
-    <div class="link">
-      <fa-icon [icon]="faBookOpenReader"></fa-icon>
-      <a routerLink="./student-reports">Student Report</a>
-    </div>
-    <div class="link">
-      <fa-icon [icon]="faChalkboardUser"></fa-icon>
-      <a routerLink="./attendance">Mark Attendance</a>
-    </div>
-    <div class="link">
-      <fa-icon [icon]="faBuildingColumns"></fa-icon>
-      <a routerLink="./departments">Manage Depts</a>
-    </div>
-    <div class="link">
-      <fa-icon [icon]="faChalkboard"></fa-icon>
-      <a routerLink="./classes">Manage Classes</a>
-    </div>
-    <div class="link">
-      <fa-icon [icon]="faAward"></fa-icon>
-      <a routerLink="./courses">Manage Courses</a>
-    </div>
-    <div class="button-link">
-      <fa-icon [icon]="faRightFromBracket"></fa-icon>
-      <button (click)="onLogout()">Logout</button>
+    <div *ngIf="isLinksShowing" class="links">
+      <div class="link">
+        <fa-icon [icon]="faChartBar"></fa-icon>
+        <a routerLink="./analytics">Analytics</a>
+      </div>
+      <div class="link">
+        <fa-icon [icon]="faUsers"></fa-icon>
+        <a routerLink="./staffs">Manage Staff</a>
+      </div>
+      <div class="link">
+        <fa-icon [icon]="faUser"></fa-icon>
+        <a routerLink="./students">Manage Students</a>
+      </div>
+      <div class="link">
+        <fa-icon [icon]="faBookOpenReader"></fa-icon>
+        <a routerLink="./student-reports">Student Report</a>
+      </div>
+      <div class="link">
+        <fa-icon [icon]="faChalkboardUser"></fa-icon>
+        <a routerLink="./attendance">Mark Attendance</a>
+      </div>
+      <div class="link">
+        <fa-icon [icon]="faBuildingColumns"></fa-icon>
+        <a routerLink="./departments">Manage Depts</a>
+      </div>
+      <div class="link">
+        <fa-icon [icon]="faChalkboard"></fa-icon>
+        <a routerLink="./classes">Manage Classes</a>
+      </div>
+      <div class="link">
+        <fa-icon [icon]="faAward"></fa-icon>
+        <a routerLink="./courses">Manage Courses</a>
+      </div>
+      <div class="button-link">
+        <fa-icon [icon]="faRightFromBracket"></fa-icon>
+        <button (click)="onLogout()">Logout</button>
+      </div>
     </div>
   </div>
 </div>

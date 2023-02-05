@@ -1,0 +1,15 @@
+<div *ngIf="barChartLabels.length" class="container">
+  <header>
+    <h1>Analytics</h1>
+  </header>
+  <canvas
+    baseChart
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [plugins]="barChartPlugins"
+    [legend]="barChartLegend"
+    [type]="barChartType"
+  >
+  </canvas>
+</div>
