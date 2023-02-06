@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://localhost:8000/",
+    "target": "https://cms-nstat.herokuapp.com/",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "info"
