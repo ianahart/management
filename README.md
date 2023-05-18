@@ -20,3 +20,4 @@ I wanted to learn how to use Angular.
 # Usage
 - user: bluemangroup@aol.com
 - pass: Test12345%
+- https://cms-nstat.netlify.app/
